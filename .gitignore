@@ -1,0 +1,58 @@
+Bash Patches/
+CalienteTools/
+DialogueViews/
+INI Tweaks/
+Interface/SkyUI/
+Interface/bartermenu.swf
+Interface/containermenu.swf
+Interface/craftingmenu.swf
+Interface/credits.txt
+Interface/fontconfig.txt
+Interface/fonts_console.swf
+Interface/fonts_ru.swf
+Interface/hudmenu.swf
+Interface/inventorymenu.swf
+Interface/levelupmenu.swf
+Interface/Translate_RUSSIAN.txt
+LSData/
+Meshes/Actors/
+Meshes/DLC01/
+Meshes/Effects/
+Meshes/weapons/
+Music/
+Readmes/
+Scripts/
+shadersfx/
+SKSE/
+Sound/fx/npc/
+Sound/fx/__folder_managed_by_vortex
+Sound/Voice/Processing/
+Strings/
+TES5Edit Backups/
+Textures/Actors/
+Textures/Blood/
+Textures/DLC01/
+Textures/ImpactDecals/
+Textures/Weapons/
+Video/
+Archive.exe
+Bashed Patch, 0.esp
+Dawnguard.esm
+Dawnguard.bsa
+Dragonborn.esm
+Dragonborn.bsa
+HearthFires.esm
+HearthFires.bsa
+Skyrim.esm
+Skyrim - Animations.bsa
+Skyrim - Interface.bsa
+Skyrim - Meshes.bsa
+Skyrim - Misc.bsa
+Skyrim - Shaders.bsa
+Skyrim - Sounds.bsa
+Skyrim - Textures.bsa
+Skyrim - Voices.bsa
+SkyUI.esp
+SkyUI.bsa
+Update.esm
+Update.bsa

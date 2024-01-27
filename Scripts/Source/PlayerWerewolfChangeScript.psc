@@ -589,9 +589,9 @@ Function PrepShift()
 	;------------------------------------------------------------
 	Game.SetBeastForm(True)
 	Game.EnableFastTravel(False)
-	Game.DisablePlayerControls(abMovement = false, abFighting = false, abCamSwitch = true, abMenu = false, abActivate = false, abJournalTabs = false, aiDisablePOVType = 1)
-	Game.ForceThirdPerson()
-	Game.ShowFirstPersonGeometry(false)
+    Game.EnablePlayerControls(abMovement = false, abFighting = false, abCamSwitch = true, abLooking = false, abSneaking = false, abMenu = false, abActivate = false, abJournalTabs = false, aiDisablePOVType = 1)
+	; Game.ForceThirdPerson()
+	Game.ShowFirstPersonGeometry(true)
 
 	;------------------------------------------------------------
 	; make game to think that a Vampire Lord transform happens, so we can access to the special Quick Menu being a Werewolf
@@ -670,6 +670,13 @@ Function ShiftBack()
 	__shiftingBack = true
 	UnRegisterForUpdate()
 	SetStage(100)
+
+	;------------------------------------------------------------
+	; Waiting for synced animation to finish...
+	;------------------------------------------------------------
+	while (Game.GetPlayer().GetAnimationVariableBool("bIsSynced"))
+        Utility.Wait(0.1)
+    endwhile
 	
 	;------------------------------------------------------------
 	; screen effect

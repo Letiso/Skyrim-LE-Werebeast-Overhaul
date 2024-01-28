@@ -106,18 +106,18 @@ Event OnInit()
 		PlayerRef.AddItem(DA05HircinesRing)
 	endif
 
-	; if PlayerRef.GetItemCount(DLC2dunFrostmoonRingBloodlust) == 0
-	; 	PlayerRef.AddItem(DLC2dunFrostmoonRingBloodlust)
-	; endif
-	; if PlayerRef.GetItemCount(DLC2dunFrostmoonRingMoon) == 0
-	; 	PlayerRef.AddItem(DLC2dunFrostmoonRingMoon)
-	; endif
-	; if PlayerRef.GetItemCount(DLC2dunFrostmoonRingInstinct) == 0
-	; 	PlayerRef.AddItem(DLC2dunFrostmoonRingInstinct)
-	; endif
-	; if PlayerRef.GetItemCount(DLC2dunFrostmoonRingHunt) == 0
-	; 	PlayerRef.AddItem(DLC2dunFrostmoonRingHunt)
-	; endif
+	if PlayerRef.GetItemCount(DLC2dunFrostmoonRingBloodlust) == 0
+		PlayerRef.AddItem(DLC2dunFrostmoonRingBloodlust)
+	endif
+	if PlayerRef.GetItemCount(DLC2dunFrostmoonRingMoon) == 0
+		PlayerRef.AddItem(DLC2dunFrostmoonRingMoon)
+	endif
+	if PlayerRef.GetItemCount(DLC2dunFrostmoonRingInstinct) == 0
+		PlayerRef.AddItem(DLC2dunFrostmoonRingInstinct)
+	endif
+	if PlayerRef.GetItemCount(DLC2dunFrostmoonRingHunt) == 0
+		PlayerRef.AddItem(DLC2dunFrostmoonRingHunt)
+	endif
 
 	; if PlayerRef.GetItemCount(WO_NecklaceTerribleRoar) == 0
 	; 	PlayerRef.AddItem(WO_NecklaceTerribleRoar)

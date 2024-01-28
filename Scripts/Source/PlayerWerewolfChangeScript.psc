@@ -1491,7 +1491,9 @@ Function SetupShiftBackTimeTracking()
 	;------------------------------------------------------------
 	; shift back tracking
 	;------------------------------------------------------------
-	RegisterForUpdate(5)
+	if !PlayerRef.IsEquipped(DA05HircinesRing)
+		RegisterForUpdate(5)
+	endif
 	
 EndFunction
 

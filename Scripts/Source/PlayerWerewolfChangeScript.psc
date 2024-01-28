@@ -590,7 +590,7 @@ Function PrepShift()
 	Game.SetBeastForm(True)
 	Game.EnableFastTravel(False)
     Game.EnablePlayerControls(abMovement = false, abFighting = false, abCamSwitch = true, abLooking = false, abSneaking = false, abMenu = false, abActivate = false, abJournalTabs = false, aiDisablePOVType = 1)
-	; Game.ForceThirdPerson()
+	Game.ForceThirdPerson()
 	Game.ShowFirstPersonGeometry(true)
 
 	;------------------------------------------------------------

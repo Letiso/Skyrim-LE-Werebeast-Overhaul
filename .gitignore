@@ -25,6 +25,7 @@ Interface/levelupmenu.swf
 Interface/Translate_RUSSIAN.txt
 
 Meshes/Actors/
+Meshes/armor/wolf/
 Meshes/DLC01/
 Meshes/Effects/
 Meshes/weapons/
@@ -11486,6 +11487,7 @@ Sound/fx/__folder_managed_by_vortex
 Sound/Voice/Processing/
 
 Textures/Actors/
+Textures/Armor/WolfcryArmorByXtudo/
 Textures/Blood/
 Textures/DLC01/
 Textures/ImpactDecals/

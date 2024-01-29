@@ -7,31 +7,6 @@ Scriptname WO_PlayerWerewolfQuestStorageScript extends Quest
 Shout Property LastHowl Auto
 Spell Property LastBeastPower Auto
 
-;------------------------------------------------------------
-; Mod setup at first load
-;------------------------------------------------------------
-Actor Property PlayerRef Auto
-
-Actor Property AelaTheHuntress Auto
-Actor Property Vilkas Auto
-Actor Property Farkas Auto
-Actor Property Skjor Auto
-
-ReferenceAlias Property AelaShield Auto
-ObjectReference Property CompanionsShieldForAela Auto
-
-Outfit Property ArmorCompanionsOutfitNoHelmet Auto
-
-Armor Property WO_ArmorCompanionsShieldHeavy Auto
-Armor Property ArmorSteelShield Auto
-Armor Property ArmorIronBandedShield Auto
-Armor Property ArmorHideShield Auto
-
-Weapon Property SkyforgeSteelSword Auto
-Weapon Property SkyforgeSteelDagger Auto
-
-Quest Property PlayerSleepQuest Auto
-
 ; ####### PROPERTIES END
 ; ==============================================================================================
 
@@ -41,59 +16,6 @@ Quest Property PlayerSleepQuest Auto
 
 Event OnInit()
 	Debug.Notification("Quest init event...")
-
-	;------------------------------------------------------------
-	; Aela
-	;------------------------------------------------------------
-	AelaShield.ForceRefTo(CompanionsShieldForAela)
-	AelaTheHuntress.SetOutfit(ArmorCompanionsOutfitNoHelmet)
-
-	if AelaTheHuntress.GetItemCount(WO_ArmorCompanionsShieldHeavy) < 1
-		if AelaTheHuntress.GetItemCount(ArmorSteelShield) > 0
-			AelaTheHuntress.RemoveItem(ArmorSteelShield)
-		endif
-		AelaTheHuntress.AddItem(WO_ArmorCompanionsShieldHeavy)
-	endif
-	
-	if AelaTheHuntress.GetItemCount(SkyforgeSteelSword) < 1
-		if AelaTheHuntress.GetItemCount(SkyforgeSteelDagger) > 0
-			AelaTheHuntress.RemoveItem(SkyforgeSteelDagger)
-		endif		
-		AelaTheHuntress.AddItem(SkyforgeSteelSword)
-	endif
-
-	;------------------------------------------------------------
-	; Vilkas
-	;------------------------------------------------------------
-	if Vilkas.GetItemCount(WO_ArmorCompanionsShieldHeavy) < 1
-		if Vilkas.GetItemCount(ArmorIronBandedShield) > 0
-			Vilkas.RemoveItem(ArmorIronBandedShield)
-		endif
-		Vilkas.AddItem(WO_ArmorCompanionsShieldHeavy)
-	endif
-
-	;------------------------------------------------------------
-	; Farkas
-	;------------------------------------------------------------
-	Farkas.SetOutfit(ArmorCompanionsOutfitNoHelmet)
-
-	;------------------------------------------------------------
-	; Skjor
-	;------------------------------------------------------------	
-	if Skjor.GetItemCount(WO_ArmorCompanionsShieldHeavy) < 1
-		if Skjor.GetItemCount(ArmorHideShield) > 0
-			Skjor.RemoveItem(ArmorHideShield)
-		endif
-		Skjor.AddItem(WO_ArmorCompanionsShieldHeavy)
-	endif
-
-	;------------------------------------------------------------
-	; Reload of PlayerSleepQuest to make it working with Hircines Ring
-	;------------------------------------------------------------
-	PlayerSleepQuest.Stop()
-	PlayerSleepQuest.Start()
-
-
 
 	;------------------------------------------------------------
 	; testing stuff
@@ -149,6 +71,8 @@ EndEvent
 
 ; ####### EVENTS END
 ; ==============================================================================================
+
+Actor Property PlayerRef Auto
 
 GlobalVariable Property DLC1WerewolfPerkPoints Auto
 

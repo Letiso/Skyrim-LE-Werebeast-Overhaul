@@ -72,6 +72,7 @@ Scripts/outfit.pex
 Scripts/perk.pex
 Scripts/potion.pex
 Scripts/quest.pex
+Scripts/QF_SkyforgeSteelWeaponsQuest_02003DEF.pex
 Scripts/race.pex
 Scripts/scroll.pex
 Scripts/shout.pex
@@ -4532,6 +4533,7 @@ Scripts/Source/QF_RelationshipMarriageFIN_00021382.psc
 Scripts/Source/QF_RelationshipMarriageWeddin_0007404E.psc
 Scripts/Source/QF_RelationshipOrcs_0006819E.psc
 Scripts/Source/QF_RoriksteadFreeform_0004EC52.psc
+Scripts/Source/QF_SkyforgeSteelWeaponsQuest_02003DEF.psc
 Scripts/Source/QF_SolitudeFreeform01_000E8BD7.psc
 Scripts/Source/QF_SolitudeFreeform02_000C7D1C.psc
 Scripts/Source/QF_SolitudeFreeform03_000C7D42.psc
@@ -11487,13 +11489,15 @@ Sound/fx/__folder_managed_by_vortex
 Sound/Voice/Processing/
 
 Textures/Actors/
-Textures/Armor/WolfcryArmorByXtudo/
+Textures/Armor/
 Textures/Blood/
 Textures/DLC01/
 Textures/ImpactDecals/
 Textures/Weapons/
 
 Archive.exe
+
+aMidianborn_Skyforge_Weapons.esp
 
 Bashed Patch, 0.esp
 

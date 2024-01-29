@@ -788,17 +788,18 @@ Function HandleWerewolfJewerlyPowers()
 
 		elseif PlayerRef.isEquipped(WO_FrostmoonRingHunt)
 			WO_RingPowerFrostmoonHunt.Value = 1
-			PlayerRef.AddSpell(WO_FrostmoonRingHuntBeastform)
+			PlayerRef.AddSpell(WO_FrostmoonRingHuntBeastform, false)
 
 		elseif PlayerRef.isEquipped(WO_FrostmoonRingInstinct)
 			WO_RingPowerFrostmoonInstinct.Value = 1
-			PlayerRef.AddSpell(WO_FrostmoonRingInstinctBeastform)
+			PlayerRef.AddSpell(WO_FrostmoonRingInstinctBeastform, false)
+
+		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingMoon)
+			WO_RingPowerFrostmoonMoon.Value = 1
 
 		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingBloodlust)
 			WO_RingPowerFrostmoonBloodlust.Value = 1
 
-		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingMoon)
-			WO_RingPowerFrostmoonMoon.Value = 1
 		endif
 
 		;------------------------------------------------------------
@@ -850,12 +851,12 @@ Function HandleWerewolfJewerlyPowers()
 			WO_RingPowerFrostmoonInstinct.Value = 1
 			PlayerRef.RemoveSpell(WO_FrostmoonRingInstinctBeastform)
 
-
+		elseif WO_RingPowerFrostmoonMoon.Value
+			WO_RingPowerFrostmoonMoon.Value = 1
+			
 		elseif WO_RingPowerFrostmoonBloodlust.Value
 			WO_RingPowerFrostmoonBloodlust.Value = 0
 
-		elseif WO_RingPowerFrostmoonMoon.Value
-			WO_RingPowerFrostmoonMoon.Value = 1
 		endif
 
 		WO_NecklacePowerTerribleRoar.Value = 0

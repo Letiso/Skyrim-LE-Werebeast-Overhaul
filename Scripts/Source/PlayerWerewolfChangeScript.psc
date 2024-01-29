@@ -71,9 +71,11 @@ Spell property WO_FrostmoonRingHuntBeastform Auto
 Armor property WO_FrostmoonRingInstinct Auto
 Spell property WO_FrostmoonRingInstinctBeastform Auto
 
-Armor property DLC2dunFrostmoonRingBloodlust Auto
 
-Armor property DLC2dunFrostmoonRingMoon Auto
+Armor property WO_FrostmoonRingMoon Auto
+Spell property WO_FrostmoonRingMoonBeastform Auto
+
+Armor property DLC2dunFrostmoonRingBloodlust Auto
 
 
 ;------------------------------------------------------------
@@ -794,8 +796,9 @@ Function HandleWerewolfJewerlyPowers()
 			WO_RingPowerFrostmoonInstinct.Value = 1
 			PlayerRef.AddSpell(WO_FrostmoonRingInstinctBeastform, false)
 
-		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingMoon)
+		elseif PlayerRef.isEquipped(WO_FrostmoonRingMoon)
 			WO_RingPowerFrostmoonMoon.Value = 1
+			PlayerRef.AddSpell(WO_FrostmoonRingMoonBeastform, false)
 
 		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingBloodlust)
 			WO_RingPowerFrostmoonBloodlust.Value = 1
@@ -853,7 +856,8 @@ Function HandleWerewolfJewerlyPowers()
 
 		elseif WO_RingPowerFrostmoonMoon.Value
 			WO_RingPowerFrostmoonMoon.Value = 1
-			
+			PlayerRef.RemoveSpell(WO_FrostmoonRingMoonBeastform)
+
 		elseif WO_RingPowerFrostmoonBloodlust.Value
 			WO_RingPowerFrostmoonBloodlust.Value = 0
 

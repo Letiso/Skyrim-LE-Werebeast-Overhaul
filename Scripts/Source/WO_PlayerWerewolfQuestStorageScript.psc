@@ -37,8 +37,8 @@ Event OnInit()
 	if PlayerRef.GetItemCount(DLC2dunFrostmoonRingInstinct) == 0
 		PlayerRef.AddItem(DLC2dunFrostmoonRingInstinct)
 	endif
-	if PlayerRef.GetItemCount(DLC2dunFrostmoonRingHunt) == 0
-		PlayerRef.AddItem(DLC2dunFrostmoonRingHunt)
+	if PlayerRef.GetItemCount(WO_FrostmoonRingHunt) == 0
+		PlayerRef.AddItem(WO_FrostmoonRingHunt)
 	endif
 
 	; if PlayerRef.GetItemCount(WO_NecklaceTerribleRoar) == 0
@@ -87,7 +87,7 @@ Armor Property DA05HircinesRing Auto
 Armor property DLC2dunFrostmoonRingBloodlust Auto
 Armor property DLC2dunFrostmoonRingMoon Auto
 Armor property DLC2dunFrostmoonRingInstinct Auto
-Armor property DLC2dunFrostmoonRingHunt Auto
+Armor property WO_FrostmoonRingHunt Auto
 
 ;------------------------------------------------------------
 ; 'Werewolf Overhaul' mod - jewerly

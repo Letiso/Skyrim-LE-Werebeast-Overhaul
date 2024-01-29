@@ -65,10 +65,15 @@ GlobalVariable Property WO_NecklacePowerCursedFlame Auto
 ;------------------------------------------------------------
 ; 'Dragonborn' DLC - Frostmoon jewerly
 ;------------------------------------------------------------
-Armor property DLC2dunFrostmoonRingBloodlust Auto
-Armor property DLC2dunFrostmoonRingMoon Auto
+Armor property WO_FrostmoonRingHunt Auto
+Spell property WO_FrostmoonRingHuntBeastform Auto
+
 Armor property DLC2dunFrostmoonRingInstinct Auto
-Armor property DLC2dunFrostmoonRingHunt Auto
+
+Armor property DLC2dunFrostmoonRingBloodlust Auto
+
+Armor property DLC2dunFrostmoonRingMoon Auto
+
 
 ;------------------------------------------------------------
 ; Skin & weapon
@@ -780,18 +785,20 @@ Function HandleWerewolfJewerlyPowers()
 		if PlayerRef.isEquipped(DA05HircinesRing)
 			WO_RingPowerHircines.Value = 1
 
-		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingMoon)
-			WO_RingPowerFrostmoonMoon.Value = 1
-
-		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingHunt)
+		elseif PlayerRef.isEquipped(WO_FrostmoonRingHunt)
 			WO_RingPowerFrostmoonHunt.Value = 1
+			PlayerRef.AddSpell(WO_FrostmoonRingHuntBeastform)
+
+		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingInstinct)
+			WO_RingPowerFrostmoonInstinct.Value = 1
 
 		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingBloodlust)
 			WO_RingPowerFrostmoonBloodlust.Value = 1
 
-		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingInstinct)
-			WO_RingPowerFrostmoonInstinct.Value = 1
+		elseif PlayerRef.isEquipped(DLC2dunFrostmoonRingMoon)
+			WO_RingPowerFrostmoonMoon.Value = 1
 		endif
+
 		;------------------------------------------------------------
 		; Left hand
 		;------------------------------------------------------------
@@ -805,8 +812,8 @@ Function HandleWerewolfJewerlyPowers()
 		; elseif PlayerRef.isEquipped(WO_NecklaceVictoryCry)
 		; 	WO_NecklacePowerVictoryCry.Value = 1
 
-		if PlayerRef.isEquipped(WO_NecklaceCallOfThePack)
-			WO_NecklacePowerCallOfThePack.Value = 1
+		; if PlayerRef.isEquipped(WO_NecklaceCallOfThePack)
+		; 	WO_NecklacePowerCallOfThePack.Value = 1
 
 		; elseif PlayerRef.isEquipped(WO_NecklaceSovereignsVoice)
 		; 	;------------------------------------------------------------
@@ -816,25 +823,36 @@ Function HandleWerewolfJewerlyPowers()
 		; elseif PlayerRef.isEquipped(WO_NecklaceUnrelentingRoar)
 		; 	WO_NecklacePowerUnrelentingRoar.Value = 1
 
-		elseif PlayerRef.isEquipped(WO_NecklaceCursedFlame)
-			WO_NecklacePowerCursedFlame.Value = 1
+		; elseif PlayerRef.isEquipped(WO_NecklaceCursedFlame)
+		; 	WO_NecklacePowerCursedFlame.Value = 1
 
 		; elseif PlayerRef.isEquipped(WO_NecklaceIndomitableRage)
 		; 	WO_NecklacePowerIndomitableRage.Value = 1
 
 		; elseif PlayerRef.isEquipped(WO_NecklaceCloakOfShadows)
 		; 	WO_NecklacePowerWO_NecklaceCloakOfShadows.Value = 1
-		endif
+		; endif
 		
 	else
 		;------------------------------------------------------------
 		; turn off all the werewolf necklace/ring variables when we change back
 		;------------------------------------------------------------
-		WO_RingPowerHircines.Value = 0
-		WO_RingPowerFrostmoonBloodlust.Value = 0
-		WO_RingPowerFrostmoonMoon.Value = 0
-		WO_RingPowerFrostmoonInstinct.Value = 0
-		WO_RingPowerFrostmoonHunt.Value = 0
+		if WO_RingPowerHircines.Value
+			WO_RingPowerHircines.Value = 0
+
+		elseif PlayerRef.isEquipped(WO_FrostmoonRingHunt)
+			WO_RingPowerFrostmoonHunt.Value = 1
+			PlayerRef.RemoveSpell(WO_FrostmoonRingHuntBeastform)
+
+		elseif WO_RingPowerFrostmoonInstinct.Value
+			WO_RingPowerFrostmoonInstinct.Value = 1
+
+		elseif WO_RingPowerFrostmoonBloodlust.Value
+			WO_RingPowerFrostmoonBloodlust.Value = 0
+
+		elseif WO_RingPowerFrostmoonMoon.Value
+			WO_RingPowerFrostmoonMoon.Value = 1
+		endif
 
 		WO_NecklacePowerTerribleRoar.Value = 0
 		WO_NecklacePowerVictoryCry.Value = 0

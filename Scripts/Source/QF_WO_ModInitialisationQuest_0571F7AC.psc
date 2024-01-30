@@ -25,6 +25,14 @@ if AelaTheHuntress.GetItemCount(SkyforgeSteelSword) < 1
 	AelaTheHuntress.AddItem(SkyforgeSteelSword, 1, true)
 endif
 
+if AelaTheHuntress.GetItemCount(HuntingBow) > 0
+	AelaTheHuntress.RemoveItem(HuntingBow, 1, true)
+endif
+
+if AelaTheHuntress.GetItemCount(IronArrow) > 0
+	AelaTheHuntress.RemoveItem(IronArrow, 100, true)
+endif
+
 ;------------------------------------------------------------
 ; Vilkas
 ;------------------------------------------------------------
@@ -80,6 +88,8 @@ Armor Property ArmorHideShield Auto
 
 Weapon Property SkyforgeSteelSword Auto
 Weapon Property SkyforgeSteelDagger Auto
+Weapon Property HuntingBow Auto
+Ammo Property IronArrow Auto
 
 Quest Property PlayerSleepQuest Auto
 

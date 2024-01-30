@@ -1,4 +1,4 @@
-﻿Scriptname WO_FrostmoonRingBloodlust extends ObjectReference  
+﻿Scriptname WO_FrostmoonRingBloodlustScript extends ObjectReference  
 
 
 ; ==============================================================================================

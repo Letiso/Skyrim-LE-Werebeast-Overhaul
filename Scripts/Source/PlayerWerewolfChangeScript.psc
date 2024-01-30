@@ -555,8 +555,8 @@ Function HandlePlayerLoadGame()
 		PlayerRef.AddSpell(WO_AbWerewolfSleep, false)
 	endif
 
-	if !PlayerRef.IsInFaction(CompanionsCircle)
-		PlayerRef.AddToFaction(CompanionsCircle)
+	if !PlayerRef.IsInFaction(WO_WerewolfHumanFormFaction)
+		PlayerRef.AddToFaction(WO_WerewolfHumanFormFaction)
 	endif
 
 	if !PlayerRef.HasSpell(PowerKhajiitNightEye)
@@ -568,7 +568,7 @@ EndFunction
 ;------------------------------------------------------------
 ; Factions
 ;------------------------------------------------------------
-Faction Property CompanionsCircle Auto
+Faction Property WO_WerewolfHumanFormFaction Auto
 
 ;------------------------------------------------------------
 ; Werewolf weaknesses

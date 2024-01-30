@@ -1,5 +1,5 @@
 ;BEGIN FRAGMENT CODE - Do not edit anything between this and the end comment
-;NEXT FRAGMENT INDEX 2
+;NEXT FRAGMENT INDEX 4
 Scriptname QF_WO_ModInitialisationQuest_0571F7AC Extends Quest Hidden
 
 ;BEGIN FRAGMENT Fragment_0
@@ -30,6 +30,7 @@ if AelaTheHuntress.GetItemCount(HuntingBow) > 0
 endif
 
 if AelaTheHuntress.GetItemCount(IronArrow) > 0
+	AelaTheHuntress.AddItem(SkyforgeSteelArrow, 100, true)
 	AelaTheHuntress.RemoveItem(IronArrow, 100, true)
 endif
 
@@ -55,6 +56,33 @@ if Skjor.GetItemCount(ArmorHideShield) > 0
 	Skjor.RemoveItem(ArmorHideShield, 1, true)
 endif
 
+;------------------------------------------------------------
+; Go to the next stage
+;------------------------------------------------------------
+WO_ModInitialisationQuest.SetStage(2)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_3
+Function Fragment_3()
+;BEGIN CODE
+AelaTheHuntress.AddToFaction(WO_WerewolfHumanFormFaction)
+Vilkas.AddToFaction(WO_WerewolfHumanFormFaction)
+Farkas.AddToFaction(WO_WerewolfHumanFormFaction)
+Skjor.AddToFaction(WO_WerewolfHumanFormFaction)
+
+;------------------------------------------------------------
+; Go to the next stage
+;------------------------------------------------------------
+WO_ModInitialisationQuest.SetStage(3)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_2
+Function Fragment_2()
+;BEGIN CODE
 ;------------------------------------------------------------
 ; Reload of PlayerSleepQuest to make it working with Hircines Ring
 ;------------------------------------------------------------
@@ -90,6 +118,10 @@ Weapon Property SkyforgeSteelSword Auto
 Weapon Property SkyforgeSteelDagger Auto
 Weapon Property HuntingBow Auto
 Ammo Property IronArrow Auto
+Ammo Property SkyforgeSteelArrow Auto
+
+
+Faction Property WO_WerewolfHumanFormFaction Auto
 
 Quest Property PlayerSleepQuest Auto
 

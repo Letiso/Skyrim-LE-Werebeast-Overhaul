@@ -1,17 +1,7 @@
 Archive.exe
 
 Bash Patches/
-CalienteTools/
 DialogueViews/
-INI Tweaks/
-LSData/
-Music/
-Readmes/
-shadersfx/
-SKSE/
-Strings/
-TES5Edit Backups/
-Video/
 
 Interface/SkyUI/
 Interface/bartermenu.swf
@@ -26,11 +16,10 @@ Interface/inventorymenu.swf
 Interface/levelupmenu.swf
 Interface/Translate_RUSSIAN.txt
 
-Meshes/Actors/
+LSData/
+
 Meshes/armor/wolf/
-Meshes/DLC01/
-Meshes/Effects/
-Meshes/weapons/
+Meshes/weapons/skyforge
 
 Scripts/activemagiceffect.pex
 Scripts/actor.pex
@@ -11486,17 +11475,18 @@ Scripts/Source/WoundRefOnLoad.psc
 Scripts/Source/WRDrawBridge01SCRIPT.psc
 Scripts/Source/WuuthradScript.psc
 
-Sound/fx/npc/
-Sound/fx/__folder_managed_by_vortex
+shadersfx/
+SKSE/
+
 Sound/Voice/Processing/
 
-Textures/Actors/
+Strings/
+TES5Edit Backups/
+
 Textures/Armor/shieldofysgramor/
 Textures/Armor/wolf
-Textures/Blood/
-Textures/DLC01/
-Textures/ImpactDecals/
-Textures/Weapons/
+Textures/Weapons/axeofysgramor
+Textures/Weapons/skyforge
 
 aMidianborn_Skyforge_Weapons.esp
 

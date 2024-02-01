@@ -539,46 +539,7 @@ Function HandlePlayerLoadGame()
 		endif
 	endif
 
-	;------------------------------------------------------------
-	; when we've installed this mod after the first trasnformation 
-	;	TODO: move this part of code to MCM
-	;------------------------------------------------------------
-	if !PlayerRef.HasSpell(WO_AbWerewolfPoison)
-		PlayerRef.AddSpell(WO_AbWerewolfPoison, false)
-	endif
-
-	if !PlayerRef.HasSpell(WO_AbWerewolfSilver)
-		PlayerRef.AddSpell(WO_AbWerewolfSilver, false)
-	endif
-
-	if !PlayerRef.HasSpell(WO_AbWerewolfSleep)
-		PlayerRef.AddSpell(WO_AbWerewolfSleep, false)
-	endif
-
-	if !PlayerRef.IsInFaction(WO_WerewolfHumanFormFaction)
-		PlayerRef.AddToFaction(WO_WerewolfHumanFormFaction)
-	endif
-
-	if !PlayerRef.HasSpell(PowerKhajiitNightEye)
-		PlayerRef.AddSpell(PowerKhajiitNightEye, false)
-	endif
-
-
 EndFunction
-;------------------------------------------------------------
-; Factions
-;------------------------------------------------------------
-Faction Property WO_WerewolfHumanFormFaction Auto
-
-;------------------------------------------------------------
-; Werewolf weaknesses
-;------------------------------------------------------------
-Spell Property WO_AbWerewolfPoison Auto
-Spell Property WO_AbWerewolfSilver Auto
-Spell Property WO_AbWerewolfSleep Auto
-
-; we wanna to have night vision at the human form eather
-Spell Property PowerKhajiitNightEye Auto
 
 
 ;------------------------------------------------------------

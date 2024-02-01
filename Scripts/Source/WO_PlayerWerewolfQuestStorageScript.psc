@@ -15,8 +15,6 @@ Spell Property LastBeastPower Auto
 ; ####### EVENTS
 
 Event OnInit()
-	Debug.Notification("Quest init event...")
-
 	;------------------------------------------------------------
 	; testing stuff
 	;------------------------------------------------------------

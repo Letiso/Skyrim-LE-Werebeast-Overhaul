@@ -84,6 +84,31 @@ EndFunction
 Function Fragment_2()
 ;BEGIN CODE
 ;------------------------------------------------------------
+; When we've installed this mod after we became a werewolf
+;------------------------------------------------------------
+if PlayerIsWerewolf.Value
+	if !Game.GetPlayer().HasSpell(WO_AbWerewolfPoison)
+		Game.GetPlayer().AddSpell(WO_AbWerewolfPoison, false)
+	endif
+
+	if !Game.GetPlayer().HasSpell(WO_AbWerewolfSilver)
+		Game.GetPlayer().AddSpell(WO_AbWerewolfSilver, false)
+	endif
+
+	if !Game.GetPlayer().HasSpell(WO_AbWerewolfSleep)
+		Game.GetPlayer().AddSpell(WO_AbWerewolfSleep, false)
+	endif
+
+	if !Game.GetPlayer().IsInFaction(WO_WerewolfHumanFormFaction)
+		Game.GetPlayer().AddToFaction(WO_WerewolfHumanFormFaction)
+	endif
+
+	if !Game.GetPlayer().HasSpell(PowerKhajiitNightEye)
+		Game.GetPlayer().AddSpell(PowerKhajiitNightEye, false)
+	endif
+endif
+
+;------------------------------------------------------------
 ; Reload of PlayerSleepQuest to make it working with Hircines Ring
 ;------------------------------------------------------------
 PlayerSleepQuest.Stop()
@@ -120,8 +145,15 @@ Weapon Property HuntingBow Auto
 Ammo Property IronArrow Auto
 Ammo Property SkyforgeSteelArrow Auto
 
-
 Faction Property WO_WerewolfHumanFormFaction Auto
+GlobalVariable Property PlayerIsWerewolf Auto
+
+Spell Property WO_AbWerewolfPoison Auto
+Spell Property WO_AbWerewolfSilver Auto
+Spell Property WO_AbWerewolfSleep Auto
+
+; we wanna to have night vision at the human form eather
+Spell Property PowerKhajiitNightEye Auto
 
 Quest Property PlayerSleepQuest Auto
 

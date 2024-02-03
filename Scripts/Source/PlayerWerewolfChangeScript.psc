@@ -774,32 +774,32 @@ Function HandleWerewolfJewerlyPowers()
 		;------------------------------------------------------------
 		; turn on all the werewolf necklace variables if we have equipped any
 		;------------------------------------------------------------
-		; if PlayerRef.isEquipped(WO_NecklaceTerribleRoar)
-		; 	WO_NecklacePowerTerribleRoar.Value = 1
+		if PlayerRef.isEquipped(WO_NecklaceTerribleRoar)
+			WO_NecklacePowerTerribleRoar.Value = 1
 
-		; elseif PlayerRef.isEquipped(WO_NecklaceVictoryCry)
-		; 	WO_NecklacePowerVictoryCry.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceVictoryCry)
+			WO_NecklacePowerVictoryCry.Value = 1
 
-		; if PlayerRef.isEquipped(WO_NecklaceCallOfThePack)
-		; 	WO_NecklacePowerCallOfThePack.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceCallOfThePack)
+			WO_NecklacePowerCallOfThePack.Value = 1
 
 		; elseif PlayerRef.isEquipped(WO_NecklaceSovereignsVoice)
 		; 	;------------------------------------------------------------
- 	; 		; maintained by WO_HowlSovereingsVoiceNecklace script (by the necklace itself)
+ 		; 	; maintained by WO_HowlSovereingsVoiceNecklace script (by the necklace itself)
 		; 	;------------------------------------------------------------
 
-		; elseif PlayerRef.isEquipped(WO_NecklaceUnrelentingRoar)
-		; 	WO_NecklacePowerUnrelentingRoar.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceUnrelentingRoar)
+			WO_NecklacePowerUnrelentingRoar.Value = 1
 
-		; elseif PlayerRef.isEquipped(WO_NecklaceCursedFlame)
-		; 	WO_NecklacePowerCursedFlame.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceCursedFlame)
+			WO_NecklacePowerCursedFlame.Value = 1
 
 		; elseif PlayerRef.isEquipped(WO_NecklaceIndomitableRage)
 		; 	WO_NecklacePowerIndomitableRage.Value = 1
 
 		; elseif PlayerRef.isEquipped(WO_NecklaceCloakOfShadows)
 		; 	WO_NecklacePowerWO_NecklaceCloakOfShadows.Value = 1
-		; endif
+		endif
 		
 	else
 		;------------------------------------------------------------

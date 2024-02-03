@@ -54,9 +54,9 @@ Event OnInit()
 	; if PlayerRef.GetItemCount(WO_NecklaceUnrelentingRoar) == 0
 	; 	PlayerRef.AddItem(WO_NecklaceUnrelentingRoar)
 	; endif
-	; if PlayerRef.GetItemCount(WO_NecklaceCursedFlame) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceCursedFlame)
-	; endif
+	if PlayerRef.GetItemCount(WO_NecklaceCursedFlame) == 0
+		PlayerRef.AddItem(WO_NecklaceCursedFlame)
+	endif
 	; if PlayerRef.GetItemCount(WO_NecklaceVictoryCry) == 0
 	; 	PlayerRef.AddItem(WO_NecklaceVictoryCry)
 	; endif

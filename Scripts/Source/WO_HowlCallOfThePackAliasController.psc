@@ -6,7 +6,7 @@ Scriptname WO_HowlCallOfThePackAliasController extends ReferenceAlias
 
 WO_HowlCallOfThePackMaintenance[] Property CallOfThePackFollowers Auto
 
-GlobalVariable Property WO_NecklacePowerCallOfThePack Auto
+GlobalVariable Property WO_NecklacePowerOfPack Auto
 
 Int Property CreaturesMaxCount Auto
 
@@ -26,7 +26,7 @@ Int Property CreaturesMaxCount Auto
 ;------------------------------------------------------------
 Function HandleSpellCast(actor akCaster, actorBase akBeastToSummon)
 	int _counter
-	int _maxCounter = CreaturesMaxCount + (WO_NecklacePowerCallOfThePack.Value as int)
+	int _maxCounter = CreaturesMaxCount + (WO_NecklacePowerOfPack.Value as int)
 
 	while _counter != _maxCounter
 		actor _beastRef = akCaster.placeAtMe(akBeastToSummon) as actor
@@ -47,7 +47,7 @@ EndFunction
 ;------------------------------------------------------------
 Function TurnOff()
 	int _counter
-	int _maxCounter = CreaturesMaxCount + (WO_NecklacePowerCallOfThePack.Value as int)
+	int _maxCounter = CreaturesMaxCount + (WO_NecklacePowerOfPack.Value as int)
 
 	while _counter != _maxCounter
 		CallOfThePackFollowers[_counter].TurnOff()

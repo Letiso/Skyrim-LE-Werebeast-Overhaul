@@ -11,7 +11,7 @@ Race Property MammothRace Auto
 Spell Property WO_HowlWerewolfCursedFlameVisualEffect Auto
 Spell Property WO_HowlWerewolfCursedFlameSKYUINotification Auto
 
-GlobalVariable Property WO_NecklacePowerCursedFlame Auto
+GlobalVariable Property WO_NecklacePowerOfFlame Auto
 
 GlobalVariable Property TimeScale auto
 

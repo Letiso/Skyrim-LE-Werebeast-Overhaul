@@ -19,7 +19,7 @@ FormList Property DisintegrationMainImmunityList Auto
 									{If the target is in this list, they will not be disintegrated.}
 Explosion Property WO_CursedFireBallExp01 Auto
 
-GlobalVariable Property WO_NecklacePowerCursedFlame Auto
+GlobalVariable Property WO_NecklacePowerOfFlame Auto
 
 Spell Property WO_HowlWerewolfCursedFlameNecklace Auto
 
@@ -89,7 +89,7 @@ Event OnDying(actor akKiller)
 		_targetActor.SetAlpha (0.0, True)
 		_targetActor.SetCriticalStage(_targetActor.CritStage_DisintegrateEnd)
 
-		if WO_NecklacePowerCursedFlame.Value
+		if WO_NecklacePowerOfFlame.Value
 			_targetActor.RemoveFromAllFactions()
 			AliasController.TryToControlCreature(_targetActor, WO_HowlWerewolfCursedFlameNecklace.GetNthEffectDuration(0))
 		endif

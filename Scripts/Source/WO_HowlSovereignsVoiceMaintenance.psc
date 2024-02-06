@@ -11,11 +11,13 @@ Race Property MammothRace Auto
 Spell Property WO_HowlWerewolfSovereignsVoiceVisualEffect Auto
 
 Spell Property WO_HowlWerewolfSovereignsVoiceSKYUINotification Auto
+
+; we're set this property at WO_HowlSovereignsVoiceNotification itself to bounded alias (this one)
 WO_HowlSovereignsVoiceNotification Property WO_HowlWerewolfSovereignsVoiceSKYUINotificationActive Auto
 
 Spell Property WO_HowlWerewolfSovereignsVoiceSKYUINotificationInfinite Auto
 
-GlobalVariable Property WO_NecklacePowerSovereignsVoice Auto
+GlobalVariable Property WO_NecklacePowerOfSovereign Auto
 
 ; it's needed for cases when effect duration is infinite (necklace power turned on) 
 ; and now we have to make it limited again (necklace power turned off)
@@ -176,7 +178,6 @@ Function HandleSpellRecast(float effectDuration = 0.0)
 	;------------------------------------------------------------
 	; player can see how long each creature still be under his control (except infinite effect durtion)
 	;------------------------------------------------------------
-	WO_HowlWerewolfSovereignsVoiceSKYUINotificationActive.IsNotRecast = False
 	ActivateMagicEffectNotification()
 
 EndFunction
@@ -207,11 +208,16 @@ EndFunction
 ;------------------------------------------------------------
 Function ActivateMagicEffectNotification()
 	;------------------------------------------------------------
+	; This is needed to avoid of effect finish alias turn off
+	;------------------------------------------------------------
+	WO_HowlWerewolfSovereignsVoiceSKYUINotificationActive.IsNotRecast = False
+
+	;------------------------------------------------------------
 	; disable effect from possible previous cast
 	;------------------------------------------------------------
 	DeactivateMagicEffectNotification()
 
-	if WO_NecklacePowerSovereignsVoice.Value == 0
+	if WO_NecklacePowerOfSovereign.Value == 0
 		;------------------------------------------------------------
 		; Show how long this creature will be under the player's control
 		;------------------------------------------------------------
@@ -222,6 +228,9 @@ Function ActivateMagicEffectNotification()
 		PlayerRef.AddSpell(WO_HowlWerewolfSovereignsVoiceSKYUINotificationInfinite, false)
 
 	endif
+
+	Utility.Wait(1)
+	WO_HowlWerewolfSovereignsVoiceSKYUINotificationActive.IsNotRecast = True
 
 EndFunction
 

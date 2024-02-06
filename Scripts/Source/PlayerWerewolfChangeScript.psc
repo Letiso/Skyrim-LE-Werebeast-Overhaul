@@ -42,12 +42,14 @@ FormList Property WerewolfHateFactions Auto
 ;------------------------------------------------------------
 Armor Property DA05HircinesRing Auto
 
-Armor Property WO_NecklaceTerribleRoar Auto
-Armor Property WO_NecklaceVictoryCry Auto
-Armor Property WO_NecklaceCallOfThePack Auto
-Armor Property WO_NecklaceSovereignsVoice Auto
-Armor Property WO_NecklaceUnrelentingRoar Auto
-Armor Property WO_NecklaceCursedFlame Auto
+Armor Property WO_NecklaceOfFear Auto
+Armor Property WO_NecklaceOfVictory Auto
+Armor Property WO_NecklaceOfPack Auto
+; Armor Property WO_NecklaceOfSovereign Auto
+Armor Property WO_NecklaceOfRoar Auto
+Armor Property WO_NecklaceOfFlame Auto
+Armor Property WO_NecklaceOfRage Auto
+Armor Property WO_NecklaceOfShadows Auto
 
 GlobalVariable Property WO_RingPowerHircines Auto
 GlobalVariable Property WO_RingPowerFrostmoonBloodlust Auto
@@ -55,12 +57,14 @@ GlobalVariable Property WO_RingPowerFrostmoonMoon Auto
 GlobalVariable Property WO_RingPowerFrostmoonInstinct Auto
 GlobalVariable Property WO_RingPowerFrostmoonHunt Auto
 
-GlobalVariable Property WO_NecklacePowerTerribleRoar Auto
-GlobalVariable Property WO_NecklacePowerVictoryCry Auto
-GlobalVariable Property WO_NecklacePowerCallOfThePack Auto
-GlobalVariable Property WO_NecklacePowerSovereignsVoice Auto
-GlobalVariable Property WO_NecklacePowerUnrelentingRoar Auto
-GlobalVariable Property WO_NecklacePowerCursedFlame Auto
+GlobalVariable Property WO_NecklacePowerOfFear Auto
+GlobalVariable Property WO_NecklacePowerOfVictory Auto
+GlobalVariable Property WO_NecklacePowerOfPack Auto
+GlobalVariable Property WO_NecklacePowerOfSovereign Auto
+GlobalVariable Property WO_NecklacePowerOfRoar Auto
+GlobalVariable Property WO_NecklacePowerOfFlame Auto
+GlobalVariable Property WO_NecklacePowerOfRage Auto
+GlobalVariable Property WO_NecklacePowerOfShadows Auto
 
 ;------------------------------------------------------------
 ; 'Dragonborn' DLC - Frostmoon jewerly
@@ -774,31 +778,31 @@ Function HandleWerewolfJewerlyPowers()
 		;------------------------------------------------------------
 		; turn on all the werewolf necklace variables if we have equipped any
 		;------------------------------------------------------------
-		if PlayerRef.isEquipped(WO_NecklaceTerribleRoar)
-			WO_NecklacePowerTerribleRoar.Value = 1
+		if PlayerRef.isEquipped(WO_NecklaceOfFear)
+			WO_NecklacePowerOfFear.Value = 1
 
-		elseif PlayerRef.isEquipped(WO_NecklaceVictoryCry)
-			WO_NecklacePowerVictoryCry.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceOfVictory)
+			WO_NecklacePowerOfVictory.Value = 1
 
-		elseif PlayerRef.isEquipped(WO_NecklaceCallOfThePack)
-			WO_NecklacePowerCallOfThePack.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceOfPack)
+			WO_NecklacePowerOfPack.Value = 1
 
-		; elseif PlayerRef.isEquipped(WO_NecklaceSovereignsVoice)
+		; elseif PlayerRef.isEquipped(WO_NecklaceOfSovereign)
 		; 	;------------------------------------------------------------
  		; 	; maintained by WO_HowlSovereingsVoiceNecklace script (by the necklace itself)
 		; 	;------------------------------------------------------------
 
-		elseif PlayerRef.isEquipped(WO_NecklaceUnrelentingRoar)
-			WO_NecklacePowerUnrelentingRoar.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceOfRoar)
+			WO_NecklacePowerOfRoar.Value = 1
 
-		elseif PlayerRef.isEquipped(WO_NecklaceCursedFlame)
-			WO_NecklacePowerCursedFlame.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceOfFlame)
+			WO_NecklacePowerOfFlame.Value = 1
 
-		; elseif PlayerRef.isEquipped(WO_NecklaceIndomitableRage)
-		; 	WO_NecklacePowerIndomitableRage.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceOfRage)
+			WO_NecklacePowerOfRage.Value = 1
 
-		; elseif PlayerRef.isEquipped(WO_NecklaceCloakOfShadows)
-		; 	WO_NecklacePowerWO_NecklaceCloakOfShadows.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceOfShadows)
+			WO_NecklacePowerOfShadows.Value = 1
 		endif
 		
 	else
@@ -826,16 +830,16 @@ Function HandleWerewolfJewerlyPowers()
 
 		endif
 
-		WO_NecklacePowerTerribleRoar.Value = 0
-		WO_NecklacePowerVictoryCry.Value = 0
-		WO_NecklacePowerCallOfThePack.Value = 0
+		WO_NecklacePowerOfFear.Value = 0
+		WO_NecklacePowerOfVictory.Value = 0
+		WO_NecklacePowerOfPack.Value = 0
 		;------------------------------------------------------------
- 		; WO_NecklacePowerSovereignsVoice.Value maintained by WO_HowlSovereingsVoiceNecklace script (by the necklace itself)
+ 		; WO_NecklacePowerOfSovereign.Value maintained by WO_HowlSovereingsVoiceNecklace script (by the necklace itself)
 		;------------------------------------------------------------
-		WO_NecklacePowerUnrelentingRoar.Value = 0
-		WO_NecklacePowerCursedFlame.Value = 0
-		; WO_NecklacePowerIndomitableRage.Value = 1
-		; WO_NecklacePowerWO_NecklaceCloakOfShadows.Value = 1
+		WO_NecklacePowerOfRoar.Value = 0
+		WO_NecklacePowerOfFlame.Value = 0
+		WO_NecklacePowerOfRage.Value = 0
+		WO_NecklacePowerOfShadows.Value = 0
 		
 	endif
 

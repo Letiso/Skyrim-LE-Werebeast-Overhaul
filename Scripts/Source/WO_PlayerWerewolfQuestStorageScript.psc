@@ -39,31 +39,30 @@ Event OnInit()
 		PlayerRef.AddItem(WO_FrostmoonRingHunt)
 	endif
 
-	; if PlayerRef.GetItemCount(WO_NecklaceTerribleRoar) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceTerribleRoar)
-	; endif
-	; if PlayerRef.GetItemCount(WO_NecklaceVictoryCry) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceVictoryCry)
-	; ; endif
-	; if PlayerRef.GetItemCount(WO_NecklaceCallOfThePack) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceCallOfThePack)
-	; endif
-	; if PlayerRef.GetItemCount(WO_NecklaceSovereignsVoice) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceSovereignsVoice)
-	; endif
-	; if PlayerRef.GetItemCount(WO_NecklaceUnrelentingRoar) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceUnrelentingRoar)
-	; endif
-	if PlayerRef.GetItemCount(WO_NecklaceCursedFlame) == 0
-		PlayerRef.AddItem(WO_NecklaceCursedFlame)
+	if PlayerRef.GetItemCount(WO_NecklaceOfFear) == 0
+		PlayerRef.AddItem(WO_NecklaceOfFear)
 	endif
-	; if PlayerRef.GetItemCount(WO_NecklaceVictoryCry) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceVictoryCry)
-	; endif
-	; if PlayerRef.GetItemCount(WO_NecklaceVictoryCry) == 0
-	; 	PlayerRef.AddItem(WO_NecklaceVictoryCry)
-	; endif
-	; endif
+	if PlayerRef.GetItemCount(WO_NecklaceOfVictory) == 0
+		PlayerRef.AddItem(WO_NecklaceOfVictory)
+	endif
+	if PlayerRef.GetItemCount(WO_NecklaceOfPack) == 0
+		PlayerRef.AddItem(WO_NecklaceOfPack)
+	endif
+	if PlayerRef.GetItemCount(WO_NecklaceOfSovereign) == 0
+		PlayerRef.AddItem(WO_NecklaceOfSovereign)
+	endif
+	if PlayerRef.GetItemCount(WO_NecklaceOfRoar) == 0
+		PlayerRef.AddItem(WO_NecklaceOfRoar)
+	endif
+	if PlayerRef.GetItemCount(WO_NecklaceOfFlame) == 0
+		PlayerRef.AddItem(WO_NecklaceOfFlame)
+	endif
+	if PlayerRef.GetItemCount(WO_NecklaceOfRage) == 0
+		PlayerRef.AddItem(WO_NecklaceOfRage)
+	endif
+	if PlayerRef.GetItemCount(WO_NecklaceOfShadows) == 0
+		PlayerRef.AddItem(WO_NecklaceOfShadows)
+	endif
 
 EndEvent
 
@@ -90,9 +89,11 @@ Armor property WO_FrostmoonRingHunt Auto
 ;------------------------------------------------------------
 ; 'Werewolf Overhaul' mod - jewerly
 ;------------------------------------------------------------
-Armor Property WO_NecklaceTerribleRoar Auto
-Armor Property WO_NecklaceVictoryCry Auto
-Armor Property WO_NecklaceCallOfThePack Auto
-Armor Property WO_NecklaceSovereignsVoice Auto
-Armor Property WO_NecklaceUnrelentingRoar Auto
-Armor Property WO_NecklaceCursedFlame Auto
+Armor Property WO_NecklaceOfFear Auto
+Armor Property WO_NecklaceOfVictory Auto
+Armor Property WO_NecklaceOfPack Auto
+Armor Property WO_NecklaceOfSovereign Auto
+Armor Property WO_NecklaceOfRoar Auto
+Armor Property WO_NecklaceOfFlame Auto
+Armor Property WO_NecklaceOfRage Auto
+Armor Property WO_NecklaceOfShadows Auto

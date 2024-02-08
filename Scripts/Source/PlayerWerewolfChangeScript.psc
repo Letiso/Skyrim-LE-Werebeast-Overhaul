@@ -31,6 +31,11 @@ ImageSpaceModifier Property WerewolfChangeImod Auto
 Sound Property MAGPowerRacialRedguardAdrenalineRushFire2DDUPLICATE000 Auto
 
 ;------------------------------------------------------------
+; Shaders
+;------------------------------------------------------------
+EffectShader Property WerewolfTrans02FXS Auto
+
+;------------------------------------------------------------
 ; Factions
 ;------------------------------------------------------------
 Faction Property PlayerWerewolfFaction Auto
@@ -644,18 +649,16 @@ Function ShiftBack()
 	SetStage(100)
 
 	;------------------------------------------------------------
-	; Waiting for synced animation to finish...
+	; effect shader
 	;------------------------------------------------------------
-	while (Game.GetPlayer().GetAnimationVariableBool("bIsSynced"))
-        Utility.Wait(0.1)
-    endwhile
-	
+	WerewolfTrans02FXS.Play(PlayerRef)
+
 	;------------------------------------------------------------
 	; screen effect
 	;------------------------------------------------------------
 	WerewolfChangeImod.Apply()
 	MAGPowerRacialRedguardAdrenalineRushFire2DDUPLICATE000.Play(PlayerRef)
-	
+
 	;------------------------------------------------------------
 	; disable saving & waiting
 	;------------------------------------------------------------
@@ -667,6 +670,10 @@ Function ShiftBack()
 	while PlayerRef.GetAnimationVariableBool("bIsSynced")
 		Utility.Wait(0.1)
 	endwhile
+	;------------------------------------------------------------
+	; effect shader
+	;------------------------------------------------------------
+	WerewolfTrans02FXS.Stop(PlayerRef)
 	
 	;------------------------------------------------------------
 	; handle transformation progress

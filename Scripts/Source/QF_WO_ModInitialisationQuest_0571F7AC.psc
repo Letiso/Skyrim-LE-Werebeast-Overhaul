@@ -2,6 +2,61 @@
 ;NEXT FRAGMENT INDEX 4
 Scriptname QF_WO_ModInitialisationQuest_0571F7AC Extends Quest Hidden
 
+;BEGIN FRAGMENT Fragment_2
+Function Fragment_2()
+;BEGIN CODE
+;------------------------------------------------------------
+; When we've installed this mod after we became a werewolf
+;------------------------------------------------------------
+if PlayerIsWerewolf.Value
+	if !Game.GetPlayer().HasSpell(WO_AbWerewolfPoison)
+		Game.GetPlayer().AddSpell(WO_AbWerewolfPoison, false)
+	endif
+
+	if !Game.GetPlayer().HasSpell(WO_AbWerewolfSilver)
+		Game.GetPlayer().AddSpell(WO_AbWerewolfSilver, false)
+	endif
+
+	if !Game.GetPlayer().HasSpell(WO_AbWerewolfSleep)
+		Game.GetPlayer().AddSpell(WO_AbWerewolfSleep, false)
+	endif
+
+	if !Game.GetPlayer().IsInFaction(WO_WerewolfHumanFormFaction)
+		Game.GetPlayer().AddToFaction(WO_WerewolfHumanFormFaction)
+	endif
+
+	if !Game.GetPlayer().HasSpell(PowerKhajiitNightEye)
+		Game.GetPlayer().AddSpell(PowerKhajiitNightEye, false)
+	endif
+endif
+
+;------------------------------------------------------------
+; Reset werewolf perks
+;------------------------------------------------------------
+int counter = 0
+while counter <= WO_OriginalWerewolfPerks.GetSize()
+	Perk currentPerk = WO_OriginalWerewolfPerks.GetAt(counter) as perk
+	if Game.GetPlayer().HasPerk(currentPerk)
+		Game.GetPlayer().RemovePerk(currentPerk)
+		DLC1WerewolfPerkPoints.Value += 1
+	endif
+	counter += 1
+endwhile
+
+;------------------------------------------------------------
+; Reload of PlayerSleepQuest to make it working with Hircines Ring
+;------------------------------------------------------------
+PlayerSleepQuest.Stop()
+PlayerSleepQuest.Start()
+
+;------------------------------------------------------------
+; We've done with initialisation, stop this quest
+;------------------------------------------------------------
+WO_ModInitialisationQuest.SetStage(100)
+;END CODE
+EndFunction
+;END FRAGMENT
+
 ;BEGIN FRAGMENT Fragment_0
 Function Fragment_0()
 ;BEGIN CODE
@@ -80,48 +135,6 @@ WO_ModInitialisationQuest.SetStage(3)
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_2
-Function Fragment_2()
-;BEGIN CODE
-;------------------------------------------------------------
-; When we've installed this mod after we became a werewolf
-;------------------------------------------------------------
-if PlayerIsWerewolf.Value
-	if !Game.GetPlayer().HasSpell(WO_AbWerewolfPoison)
-		Game.GetPlayer().AddSpell(WO_AbWerewolfPoison, false)
-	endif
-
-	if !Game.GetPlayer().HasSpell(WO_AbWerewolfSilver)
-		Game.GetPlayer().AddSpell(WO_AbWerewolfSilver, false)
-	endif
-
-	if !Game.GetPlayer().HasSpell(WO_AbWerewolfSleep)
-		Game.GetPlayer().AddSpell(WO_AbWerewolfSleep, false)
-	endif
-
-	if !Game.GetPlayer().IsInFaction(WO_WerewolfHumanFormFaction)
-		Game.GetPlayer().AddToFaction(WO_WerewolfHumanFormFaction)
-	endif
-
-	if !Game.GetPlayer().HasSpell(PowerKhajiitNightEye)
-		Game.GetPlayer().AddSpell(PowerKhajiitNightEye, false)
-	endif
-endif
-
-;------------------------------------------------------------
-; Reload of PlayerSleepQuest to make it working with Hircines Ring
-;------------------------------------------------------------
-PlayerSleepQuest.Stop()
-PlayerSleepQuest.Start()
-
-;------------------------------------------------------------
-; We've done with initialisation, stop this quest
-;------------------------------------------------------------
-WO_ModInitialisationQuest.SetStage(100)
-;END CODE
-EndFunction
-;END FRAGMENT
-
 ;END FRAGMENT CODE - Do not edit anything between this and the begin comment
 
 Actor Property AelaTheHuntress Auto
@@ -157,4 +170,8 @@ Spell Property PowerKhajiitNightEye Auto
 
 Quest Property PlayerSleepQuest Auto
 
-Quest Property WO_ModInitialisationQuest  Auto  
+Quest Property WO_ModInitialisationQuest  Auto
+
+Formlist Property WO_OriginalWerewolfPerks  Auto
+
+GlobalVariable Property DLC1WerewolfPerkPoints  Auto

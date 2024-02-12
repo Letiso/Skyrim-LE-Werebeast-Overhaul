@@ -53,7 +53,7 @@ Armor Property WO_NecklaceOfPack Auto
 ; Armor Property WO_NecklaceOfSovereign Auto
 Armor Property WO_NecklaceOfRoar Auto
 Armor Property WO_NecklaceOfFlame Auto
-Armor Property WO_NecklaceOfRage Auto
+Armor Property WO_NecklaceOfFury Auto
 Armor Property WO_NecklaceOfShadows Auto
 
 GlobalVariable Property WO_RingPowerHircines Auto
@@ -68,7 +68,7 @@ GlobalVariable Property WO_NecklacePowerOfPack Auto
 GlobalVariable Property WO_NecklacePowerOfSovereign Auto
 GlobalVariable Property WO_NecklacePowerOfRoar Auto
 GlobalVariable Property WO_NecklacePowerOfFlame Auto
-GlobalVariable Property WO_NecklacePowerOfRage Auto
+GlobalVariable Property WO_NecklacePowerOfFury Auto
 GlobalVariable Property WO_NecklacePowerOfShadows Auto
 
 ;------------------------------------------------------------
@@ -154,8 +154,8 @@ Shout Property WO_HowlWerewolfCursedFlame2 Auto
 Shout Property WO_HowlWerewolfCursedFlame3 Auto
 WordOfPower Property WO_HowlCursedFlame Auto
 
-Shout Property WO_HowlWerewolfIndomitableRage Auto
-WordOfPower Property WO_HowlIndomitableRage Auto
+Shout Property WO_HowlWerewolfFuriousHowl Auto
+WordOfPower Property WO_HowlFuriousHowl Auto
 
 Shout Property WO_HowlWerewolfCloakOfShadows Auto
 WordOfPower Property WO_HowlCloakOfShadows Auto
@@ -255,7 +255,7 @@ Perk Property WO_UnrelentingRoar3 Auto
 Perk Property WO_CursedFlame1 Auto
 Perk Property WO_CursedFlame2 Auto
 Perk Property WO_CursedFlame3 Auto
-Perk Property WO_IndomitableRage1 Auto
+Perk Property WO_FuriousHowl1 Auto
 Perk Property WO_CloakOfShadows1 Auto
 
 ; passive abilities
@@ -674,7 +674,7 @@ Function ShiftBack()
 	; effect shader
 	;------------------------------------------------------------
 	WerewolfTrans02FXS.Stop(PlayerRef)
-	
+
 	;------------------------------------------------------------
 	; handle transformation progress
 	;------------------------------------------------------------
@@ -805,8 +805,8 @@ Function HandleWerewolfJewerlyPowers()
 		elseif PlayerRef.isEquipped(WO_NecklaceOfFlame)
 			WO_NecklacePowerOfFlame.Value = 1
 
-		elseif PlayerRef.isEquipped(WO_NecklaceOfRage)
-			WO_NecklacePowerOfRage.Value = 1
+		elseif PlayerRef.isEquipped(WO_NecklaceOfFury)
+			WO_NecklacePowerOfFury.Value = 1
 
 		elseif PlayerRef.isEquipped(WO_NecklaceOfShadows)
 			WO_NecklacePowerOfShadows.Value = 1
@@ -845,7 +845,7 @@ Function HandleWerewolfJewerlyPowers()
 		;------------------------------------------------------------
 		WO_NecklacePowerOfRoar.Value = 0
 		WO_NecklacePowerOfFlame.Value = 0
-		WO_NecklacePowerOfRage.Value = 0
+		WO_NecklacePowerOfFury.Value = 0
 		WO_NecklacePowerOfShadows.Value = 0
 		
 	endif
@@ -1019,7 +1019,7 @@ Function HandlePlayerAbilities()
 		AddHowlSovereignsVoice()
 		AddHowlUnrelentingRoar()
 		AddHowlCursedFlame()
-		AddHowlIndomitableRage()
+		AddHowlFuriousHowl()
 		AddHowlCloakOfShadows()
 
 		;------------------------------------------------------------
@@ -1292,10 +1292,10 @@ EndFunction
 
 
 ;------------------------------------------------------------
-Function AddHowlIndomitableRage()
-	if PlayerRef.HasPerk(WO_IndomitableRage1)
-		Game.UnlockWord(WO_HowlIndomitableRage)
-		PlayerRef.AddShout(WO_HowlWerewolfIndomitableRage)
+Function AddHowlFuriousHowl()
+	if PlayerRef.HasPerk(WO_FuriousHowl1)
+		Game.UnlockWord(WO_HowlFuriousHowl)
+		PlayerRef.AddShout(WO_HowlWerewolfFuriousHowl)
 	endif
 	
 EndFunction

@@ -57,8 +57,8 @@ Event OnInit()
 	if PlayerRef.GetItemCount(WO_NecklaceOfFlame) == 0
 		PlayerRef.AddItem(WO_NecklaceOfFlame)
 	endif
-	if PlayerRef.GetItemCount(WO_NecklaceOfRage) == 0
-		PlayerRef.AddItem(WO_NecklaceOfRage)
+	if PlayerRef.GetItemCount(WO_NecklaceOfFury) == 0
+		PlayerRef.AddItem(WO_NecklaceOfFury)
 	endif
 	if PlayerRef.GetItemCount(WO_NecklaceOfShadows) == 0
 		PlayerRef.AddItem(WO_NecklaceOfShadows)
@@ -95,5 +95,5 @@ Armor Property WO_NecklaceOfPack Auto
 Armor Property WO_NecklaceOfSovereign Auto
 Armor Property WO_NecklaceOfRoar Auto
 Armor Property WO_NecklaceOfFlame Auto
-Armor Property WO_NecklaceOfRage Auto
+Armor Property WO_NecklaceOfFury Auto
 Armor Property WO_NecklaceOfShadows Auto

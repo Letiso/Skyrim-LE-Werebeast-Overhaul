@@ -90,8 +90,8 @@ WordOfPower Property WO_HowlUnrelentingRoar Auto
 Shout Property WO_HowlWerewolfScentOfBlood Auto
 WordOfPower Property WO_HowlScentOfBlood Auto
 
-Shout Property WO_HowlWerewolfIndominatableRage Auto
-WordOfPower Property WO_HowlIndominatableRage Auto
+Shout Property WO_HowlWerewolfFuriousHowl Auto
+WordOfPower Property WO_HowlFuriousHowl Auto
 
 Shout Property HowlWerewolfSummonWolves Auto
 WordOfPower Property HowlSummonWolves1 Auto
@@ -176,7 +176,7 @@ Perk Property WO_InnerCompassPerk Auto
 Perk Property WO_TerribleRoar1 Auto
 Perk Property WO_UnrelentingRoar1 Auto
 Perk Property WO_ScentOfBlood1 Auto
-Perk Property WO_IndomitableRage1 Auto
+Perk Property WO_FuriousHowl1 Auto
 Perk Property WO_AidOfBrothers1 Auto
 Perk Property WO_PackLeadersHowl1 Auto
 
@@ -719,7 +719,7 @@ Function HandlePlayerAbilities()
 		AddHowlTerribleRoar()
 		AddHowlUnrelentingRoar()
 		AddHowlScentOfBlood()
-		AddHowlIndomitableRage()
+		AddHowlFuriousHowl()
 		; AddHowlBestialHunting()
 		AddHowlCallOfTheBrotherhood()
 		AddHowlPackLeadersHowl()
@@ -813,10 +813,10 @@ EndFunction
 
 
 ;------------------------------------------------------------
-Function AddHowlIndomitableRage()
-	if PlayerRef.HasPerk(WO_IndomitableRage1)
-		Game.UnlockWord(WO_HowlIndominatableRage)
-		PlayerRef.AddShout(WO_HowlWerewolfIndominatableRage)
+Function AddHowlFuriousHowl()
+	if PlayerRef.HasPerk(WO_FuriousHowl1)
+		Game.UnlockWord(WO_HowlFuriousHowl)
+		PlayerRef.AddShout(WO_HowlWerewolfFuriousHowl)
 	endif
 	
 EndFunction

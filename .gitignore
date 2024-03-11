@@ -1,6 +1,7 @@
 Archive.exe
 
 Bash Patches/
+BashTags/
 DialogueViews/
 
 Interface/SkyUI/
@@ -47,6 +48,8 @@ Scripts/formlist.pex
 Scripts/formtype.pex
 Scripts/game.pex
 Scripts/gamedata.pex
+Scripts/HeadChopBlock2ManHookupScript.pex
+Scripts/HeadChopBlockHookupSCRIPT.pex
 Scripts/headpart.pex
 Scripts/ingredient.pex
 Scripts/input.pex
@@ -66,6 +69,7 @@ Scripts/quest.pex
 Scripts/QF_SkyforgeSteelWeaponsQuest_02003DEF.pex
 Scripts/race.pex
 Scripts/scroll.pex
+Scripts/SF_MS08AmbushScene_00057FAC.pex
 Scripts/shout.pex
 Scripts/SKI_ConfigBase.pex
 Scripts/SKI_ConfigManager.pex
@@ -11483,10 +11487,17 @@ Sound/Voice/Processing/
 Strings/
 TES5Edit Backups/
 
+Textures/architecture/
+Textures/clutter/
+Textures/dlc02/
+Textures/dungeons/
+Textures/interface/
 Textures/Armor/shieldofysgramor/
 Textures/Armor/wolf
 Textures/Weapons/axeofysgramor
 Textures/Weapons/skyforge
+
+Video/
 
 aMidianborn_Skyforge_Weapons.esp
 
@@ -11510,9 +11521,15 @@ Skyrim - Shaders.bsa
 Skyrim - Sounds.bsa
 Skyrim - Textures.bsa
 Skyrim - Voices.bsa
+Skyrim - VoicesExtra.bsa
 
 SkyUI.esp
 SkyUI.bsa
+
+Unofficial Skyrim Legendary Edition Patch.bsa
+Unofficial Skyrim Legendary Edition Patch.esp
+Unofficial Skyrim Legendary Edition Patch.ini
+Unofficial Skyrim Legendary Edition Patch.modgroups
 
 Update.esm
 Update.bsa

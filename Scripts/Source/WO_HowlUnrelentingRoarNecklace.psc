@@ -19,11 +19,11 @@ Scriptname WO_HowlUnrelentingRoarNecklace extends ActiveMagicEffect
 Event OnEffectStart(actor akTarget, actor akCaster)
 	actorValueInfo healthAVIF = ActorValueInfo.GetAVIByName("health")
 	float _targetMaxHealth = healthAVIF.GetMaximumValue(akTarget)
-
 	float _damagePercentage = self.GetMagnitude()
-	float _maxDamageToDeal = (akCaster.GetAV("UnarmedDamage") + akCaster.GetLevel()) * 2
 
 	float _damageToDeal = _targetMaxHealth * _damagePercentage
+	float _maxDamageToDeal = (akCaster.GetAV("UnarmedDamage") + akCaster.GetLevel()) * 2
+
 	if _damageToDeal > _maxDamageToDeal
 		_damageToDeal = _maxDamageToDeal
 	endif

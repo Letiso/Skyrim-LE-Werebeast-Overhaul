@@ -40,7 +40,7 @@ EndEvent
 Event OnEffectStart(actor akTarget, actor AkCaster)
 	_lastCombo = 0
 
-	RegisterForUpdate(2)
+	RegisterForUpdate(3)
 	
 EndEvent
 

@@ -14,11 +14,15 @@ WO_HowlWerewolfTerribleRoarSpell2.SetNthEffectMagnitude(1, Game.GetPlayer().GetL
 
 WO_HowlTerribleRoarChargesCount.Value = 2
 
-Game.GetPlayer().AddShout(WO_HowlWerewolfTerribleRoar2)
-if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfTerribleRoar1
-	Game.GetPlayer().EquipShout(WO_HowlWerewolfTerribleRoar2)
+if !Game.GetPlayer().HasSpell(WO_HowlWerewolfTerribleRoar1)
+	TerribleRoarCooldownHandler.HandlePerkGain(WO_HowlWerewolfTerribleRoar2)
+else
+	Game.GetPlayer().AddShout(WO_HowlWerewolfTerribleRoar2)
+	if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfTerribleRoar1
+		Game.GetPlayer().EquipShout(WO_HowlWerewolfTerribleRoar2)
+	endif
+	Game.GetPlayer().RemoveShout(WO_HowlWerewolfTerribleRoar1)
 endif
-Game.GetPlayer().RemoveShout(WO_HowlWerewolfTerribleRoar1)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -105,6 +109,10 @@ Function Fragment_27()
 Game.IncrementStat("NumWerewolfPerks")
 
 WO_HowlVictoryCryChargesCount.Value = 2
+
+if !Game.GetPlayer().HasSpell(WO_HowlWerewolfVictoryCry)
+	VictoryCryCooldownHandler.HandlePerkGain(WO_HowlWerewolfVictoryCry)
+endif
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -568,11 +576,15 @@ WO_HowlWerewolfTerribleRoarSpell3.SetNthEffectMagnitude(1, Game.GetPlayer().GetL
 
 WO_HowlTerribleRoarChargesCount.Value = 3
 
-Game.GetPlayer().AddShout(WO_HowlWerewolfTerribleRoar3)
-if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfTerribleRoar2
-	Game.GetPlayer().EquipShout(WO_HowlWerewolfTerribleRoar3)
+if !Game.GetPlayer().HasSpell(WO_HowlWerewolfTerribleRoar2)
+	TerribleRoarCooldownHandler.HandlePerkGain(WO_HowlWerewolfTerribleRoar3)
+else
+	Game.GetPlayer().AddShout(WO_HowlWerewolfTerribleRoar3)
+	if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfTerribleRoar2
+		Game.GetPlayer().EquipShout(WO_HowlWerewolfTerribleRoar3)
+	endif
+	Game.GetPlayer().RemoveShout(WO_HowlWerewolfTerribleRoar2)
 endif
-Game.GetPlayer().RemoveShout(WO_HowlWerewolfTerribleRoar2)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -823,6 +835,10 @@ Function Fragment_28()
 Game.IncrementStat("NumWerewolfPerks")
 
 WO_HowlVictoryCryChargesCount.Value = 3
+
+if !Game.GetPlayer().HasSpell(WO_HowlWerewolfVictoryCry)
+	VictoryCryCooldownHandler.HandlePerkGain(WO_HowlWerewolfVictoryCry)
+endif
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -977,7 +993,10 @@ Spell Property WO_PerkBeastSpirit3 Auto
 Spell Property WO_PerkMoonlight1 Auto
 Spell Property WO_PerkMoonlight2 Auto
 
+WO_HowlCoolDownHandler Property TerribleRoarCooldownHandler Auto
+WO_HowlCoolDownHandler Property VictoryCryCooldownHandler Auto
 WO_HowlCoolDownHandler Property UnrelentingRoarCooldownHandler Auto
+WO_HowlCoolDownHandler Property SovereignsVoiceCooldownHandler Auto
 WO_HowlCoolDownHandler Property CursedFlameCooldownHandler Auto
 
 GlobalVariable Property WO_WerewolfHunterPerk Auto

@@ -30,6 +30,7 @@ Function Fragment_77()
 
 Game.IncrementStat("NumWerewolfPerks")
 
+WO_HowlSovereignsVoiceChargesCount.Value = 2
 WO_SovereignsVoiceCreaturesMaxCount.Value = 6
 
 Game.GetPlayer().AddShout(WO_HowlWerewolfSovereignsVoice2)
@@ -102,6 +103,8 @@ Function Fragment_27()
 ; Player picks victory cry 2 perk
 
 Game.IncrementStat("NumWerewolfPerks")
+
+WO_HowlVictoryCryChargesCount.Value = 2
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -541,6 +544,7 @@ Function Fragment_78()
 
 Game.IncrementStat("NumWerewolfPerks")
 
+WO_HowlSovereignsVoiceChargesCount.Value = 3
 WO_SovereignsVoiceCreaturesMaxCount.Value = 10
 
 Game.GetPlayer().AddShout(WO_HowlWerewolfSovereignsVoice3)
@@ -579,6 +583,8 @@ Function Fragment_26()
 ; Player picks victory cry 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
+
+WO_HowlVictoryCryChargesCount.Value = 1
 
 Game.UnlockWord(WO_HowlVictoryCry)
 Game.GetPlayer().AddShout(WO_HowlWerewolfVictoryCry)
@@ -643,6 +649,7 @@ Function Fragment_76()
 
 Game.IncrementStat("NumWerewolfPerks")
 
+WO_HowlSovereignsVoiceChargesCount.Value = 1
 WO_SovereignsVoiceCreaturesMaxCount.Value = 3
 
 Game.UnlockWord(WO_HowlSovereignsVoice)
@@ -814,6 +821,8 @@ Function Fragment_28()
 ; Player picks victory cry 3 perk
 
 Game.IncrementStat("NumWerewolfPerks")
+
+WO_HowlVictoryCryChargesCount.Value = 3
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -912,6 +921,7 @@ GlobalVariable Property WO_HowlTerribleRoarChargesCount Auto
 Shout Property WO_HowlWerewolfVictoryCry Auto
 WordOfPower Property WO_HowlVictoryCry Auto
 Message Property WO_VictoryCryGainMessage Auto
+GlobalVariable Property WO_HowlVictoryCryChargesCount Auto
 
 Shout Property WO_HowlWerewolfCallOfThePack Auto
 WordOfPower Property WO_HowlCallOfThePack Auto
@@ -923,6 +933,7 @@ Shout Property WO_HowlWerewolfSovereignsVoice2 Auto
 Shout Property WO_HowlWerewolfSovereignsVoice3 Auto
 WordOfPower Property WO_HowlSovereignsVoice Auto
 Message Property WO_SovereignsVoiceGainMessage Auto
+GlobalVariable Property WO_HowlSovereignsVoiceChargesCount Auto
 
 Shout Property WO_HowlWerewolfUnrelentingRoar1 Auto
 Shout Property WO_HowlWerewolfUnrelentingRoar2 Auto

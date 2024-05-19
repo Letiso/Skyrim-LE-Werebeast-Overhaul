@@ -12,11 +12,6 @@ ReferenceAlias Property Alias_Beast_Power__Accelerated_Metabolism Auto
 ReferenceAlias Property Alias_Howl__Cursed_Flame Auto
 ;END ALIAS PROPERTY
 
-;BEGIN ALIAS PROPERTY Howl__Furious_Howl
-;ALIAS PROPERTY TYPE ReferenceAlias
-ReferenceAlias Property Alias_Howl__Furious_Howl Auto
-;END ALIAS PROPERTY
-
 ;BEGIN ALIAS PROPERTY Beast_Power__Supernatural_Reflexes
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_Beast_Power__Supernatural_Reflexes Auto
@@ -37,9 +32,24 @@ ReferenceAlias Property Alias_Howl__Call_Of_The_Pack Auto
 ReferenceAlias Property Alias_Player Auto
 ;END ALIAS PROPERTY
 
+;BEGIN ALIAS PROPERTY Howl__Victory_Cry
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_Howl__Victory_Cry Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY Howl__Furious_Howl
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_Howl__Furious_Howl Auto
+;END ALIAS PROPERTY
+
 ;BEGIN ALIAS PROPERTY Howl__Terrible_Roar
 ;ALIAS PROPERTY TYPE ReferenceAlias
 ReferenceAlias Property Alias_Howl__Terrible_Roar Auto
+;END ALIAS PROPERTY
+
+;BEGIN ALIAS PROPERTY Howl__Sovereigns_Voice
+;ALIAS PROPERTY TYPE ReferenceAlias
+ReferenceAlias Property Alias_Howl__Sovereigns_Voice Auto
 ;END ALIAS PROPERTY
 
 ;BEGIN FRAGMENT Fragment_7

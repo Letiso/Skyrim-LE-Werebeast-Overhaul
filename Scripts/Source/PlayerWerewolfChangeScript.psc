@@ -159,6 +159,8 @@ WordOfPower Property WO_HowlFuriousHowl Auto
 
 Shout Property WO_HowlWerewolfCloakOfShadows Auto
 WordOfPower Property WO_HowlCloakOfShadows Auto
+Spell Property WO_HowlWerewolfCloakOfShadows1 Auto
+Spell Property WO_HowlWerewolfCloakOfShadowsCloak Auto
 
 ;------------------------------------------------------------
 ; To save last equipped spell except 'Revert Form' & equip it next time
@@ -424,7 +426,7 @@ EndFunction
 ;------------------------------------------------------------
 Function ApplyBaseFeedBonus(actor akVictim)
 	;------------------------------------------------------------
-	; health regen from feeding
+	; health & stamina regen from feeding
 	;------------------------------------------------------------
 	WerewolfFeed.Cast(PlayerRef)
 
@@ -460,7 +462,7 @@ EndFunction
 ;------------------------------------------------------------
 Function HandlePlayerLoadGame()
 	;------------------------------------------------------------
-	; on save reload this settings are reseting to the defaults, so we have to set them again
+	; this settings are resets to default each save load, so we have to set them again
 	;------------------------------------------------------------
 	ObjectManager.SetForm("RIVR", WerewolfBeastRace)
 	ObjectManager.SetForm("RIVS", WO_SpellsPowers)
@@ -502,6 +504,28 @@ Function HandlePlayerLoadGame()
 			WO_HowlWerewolfUnrelentingRoarSpell2.SetNthEffectMagnitude(1, playerLevel * 1.15)
 		else
 			WO_HowlWerewolfUnrelentingRoarSpell1.SetNthEffectMagnitude(1, playerLevel * 1.0)
+		endif
+	endif
+
+	;------------------------------------------------------------
+	; and the same for Cloak of Shadows spells
+	;------------------------------------------------------------
+	if PlayerRef.HasPerk(WO_CloakOfShadows1)
+		float _actorValueToIncriseMult = 0.3
+		actorValueInfo _damageResistAVIF = ActorValueInfo.GetActorValueInfoByName("DamageResist")
+
+		float _additionalDamageResist = _damageResistAVIF.GetMaximumValue(PlayerRef) * _actorValueToIncriseMult
+
+		WO_HowlWerewolfCloakofShadows1.SetNthEffectMagnitude(0, _additionalDamageResist)
+
+		if WO_NecklacePowerOfShadows.Value > 0
+			actorValueInfo _staminaAVIF = ActorValueInfo.GetActorValueInfoByName("stamina")
+
+			float _staminaToAbsorb = _staminaAVIF.GetMaximumValue(PlayerRef) * 0.05
+			float _damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
+
+			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(0, _damageToDeal)
+			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(1, _staminaToAbsorb)
 		endif
 	endif
 
@@ -1304,6 +1328,23 @@ EndFunction
 ;------------------------------------------------------------
 Function AddHowlCloakOfShadows()
 	if PlayerRef.HasPerk(WO_CloakOfShadows1)
+		float _actorValueToIncriseMult = 0.3
+		actorValueInfo _damageResistAVIF = ActorValueInfo.GetActorValueInfoByName("DamageResist")
+
+		float _additionalDamageResist = _damageResistAVIF.GetMaximumValue(PlayerRef) * _actorValueToIncriseMult
+
+		WO_HowlWerewolfCloakofShadows1.SetNthEffectMagnitude(0, _additionalDamageResist)
+
+		if WO_NecklacePowerOfShadows.Value > 0
+			actorValueInfo _staminaAVIF = ActorValueInfo.GetActorValueInfoByName("stamina")
+
+			float _staminaToAbsorb = _staminaAVIF.GetMaximumValue(PlayerRef) * 0.05
+			float _damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
+
+			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(0, _damageToDeal)
+			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(1, _staminaToAbsorb)
+		endif
+
 		Game.UnlockWord(WO_HowlCloakOfShadows)
 		PlayerRef.AddShout(WO_HowlWerewolfCloakOfShadows)
 	endif

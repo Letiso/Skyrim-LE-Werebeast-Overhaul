@@ -10,7 +10,18 @@ GlobalVariable Property WO_NecklacePowerOfPack Auto
 
 Int Property CreaturesMaxCount Auto
 
+WO_HowlCallOfThePackScript Property HowlMagicEffect Auto
+
 ;########## PROPERTIES INIT END
+; ==============================================================================================
+
+
+; ==============================================================================================
+; ####### INTERNAL DATA
+
+int _maxCounter
+
+; ####### INTERNAL DATA END
 ; ==============================================================================================
 
 
@@ -25,8 +36,10 @@ Int Property CreaturesMaxCount Auto
 
 ;------------------------------------------------------------
 Function HandleSpellCast(actor akCaster, actorBase akBeastToSummon)
+	_maxCounter = CreaturesMaxCount + (WO_NecklacePowerOfPack.Value as int)
+	HowlMagicEffect.MaxCreaturesCount = _maxCounter
+
 	int _counter
-	int _maxCounter = CreaturesMaxCount + (WO_NecklacePowerOfPack.Value as int)
 
 	while _counter != _maxCounter
 		actor _beastRef = akCaster.placeAtMe(akBeastToSummon) as actor
@@ -47,7 +60,6 @@ EndFunction
 ;------------------------------------------------------------
 Function TurnOff()
 	int _counter
-	int _maxCounter = CreaturesMaxCount + (WO_NecklacePowerOfPack.Value as int)
 
 	while _counter != _maxCounter
 		CallOfThePackFollowers[_counter].TurnOff()

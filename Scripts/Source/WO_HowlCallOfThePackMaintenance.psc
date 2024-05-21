@@ -14,9 +14,7 @@ Actor Property PlayerRef Auto
 ; ####### INTERNAL DATA
 
 actor _actorRef
-
 string _displayName
-bool _isFlashingGhost
 
 ; ####### INTERNAL DATA END
 ; ==============================================================================================

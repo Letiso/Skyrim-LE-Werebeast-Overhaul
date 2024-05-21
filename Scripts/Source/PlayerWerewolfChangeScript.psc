@@ -50,11 +50,11 @@ Armor Property DA05HircinesRing Auto
 Armor Property WO_NecklaceOfFear Auto
 Armor Property WO_NecklaceOfVictory Auto
 Armor Property WO_NecklaceOfPack Auto
-; Armor Property WO_NecklaceOfSovereign Auto
+; Armor Property WO_NecklaceOfSovereign Auto 		; maintained by necklace itself
 Armor Property WO_NecklaceOfRoar Auto
 Armor Property WO_NecklaceOfFlame Auto
 Armor Property WO_NecklaceOfFury Auto
-Armor Property WO_NecklaceOfShadows Auto
+; Armor Property WO_NecklaceOfShadows Auto 			; maintained by necklace itself
 
 GlobalVariable Property WO_RingPowerHircines Auto
 GlobalVariable Property WO_RingPowerFrostmoonBloodlust Auto
@@ -832,8 +832,8 @@ Function HandleWerewolfJewerlyPowers()
 		elseif PlayerRef.isEquipped(WO_NecklaceOfFury)
 			WO_NecklacePowerOfFury.Value = 1
 
-		elseif PlayerRef.isEquipped(WO_NecklaceOfShadows)
-			WO_NecklacePowerOfShadows.Value = 1
+		; elseif PlayerRef.isEquipped(WO_NecklaceOfShadows)
+		; 	WO_NecklacePowerOfShadows.Value = 1
 		endif
 		
 	else

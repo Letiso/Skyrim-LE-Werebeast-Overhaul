@@ -264,11 +264,6 @@ Perk Property WO_CloakOfShadows1 Auto
 Perk Property WO_Adrenaline Auto
 Spell Property WO_PerkAdrenaline Auto
 
-Perk Property WO_Acrobat1 Auto
-Perk Property WO_Acrobat2 Auto
-Spell Property WO_PerkAcrobat1 Auto
-Spell Property WO_PerkAcrobat2 Auto
-
 Perk Property WO_Maniac Auto
 Spell Property WO_PerkManiac Auto
 
@@ -1070,15 +1065,6 @@ Function HandlePlayerAbilities()
 			; feeding event call back
 			;------------------------------------------------------------
 			PlayerRef.AddSpell(WO_PerkManiac, false)
-		endif
-
-		if PlayerRef.HasPerk(WO_Acrobat2)
-			;------------------------------------------------------------
-			; incrising jump height ability
-			;------------------------------------------------------------
-			PlayerRef.AddSpell(WO_PerkAcrobat2, false)
-		elseif PlayerRef.HasPerk(WO_Acrobat1)
-			PlayerRef.AddSpell(WO_PerkAcrobat1, false)
 		endif
 
 	else

@@ -278,9 +278,6 @@ Function Fragment_52()
 ; Player picks acrobat 2 perk
 
 Game.IncrementStat("NumWerewolfPerks")
-
-Game.GetPlayer().RemoveSpell(WO_PerkAcrobat1)
-Game.GetPlayer().AddSpell(WO_PerkAcrobat2, false)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -607,8 +604,6 @@ Function Fragment_51()
 ; Player picks acrobat 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
-
-Game.GetPlayer().Addspell(WO_PerkAcrobat1, false)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -978,9 +973,6 @@ Message Property WO_CloakOfShadowsGainMessage Auto
 FormList Property WO_SpellsPowers  Auto
 
 Spell Property WO_PerkAdrenaline Auto
-
-Spell Property WO_PerkAcrobat1 Auto
-Spell Property WO_PerkAcrobat2 Auto
 
 GlobalVariable Property WO_FeedingCounter Auto
 Spell Property WO_PerkManiac Auto

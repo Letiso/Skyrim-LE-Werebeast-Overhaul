@@ -16,12 +16,15 @@ actor targetActor
 
 ;-----------------------------------
 Event OnEffectStart(Actor akTarget, Actor akCaster)
+	targetActor = akTarget
 	Game.SetGameSettingFloat("fJumpHeightMin", GetMagnitude())	
 	
 EndEvent
 
 ;-----------------------------------
 Event OnRaceSwitchComplete()
+	Debug.Notification(targetActor.GetRace())
+
 	if targetActor.GetRace() != WerewolfBeastRace
 		targetActor.RemoveSpell(WO_PerkAcrobat1)
 		targetActor.RemoveSpell(WO_PerkAcrobat2)

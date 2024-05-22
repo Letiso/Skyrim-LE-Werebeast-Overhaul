@@ -1,25 +1,35 @@
-Scriptname WO_HowlCloakOfShadowsScript extends ActiveMagicEffect
+Scriptname WO_HowlCloakOfShadowsCloakSwitchSound extends ActiveMagicEffect
 
 
 ; ==============================================================================================
 ;########## PROPERTIES 
+
+Sound Property MAGCloakIn Auto
+Sound Property MAGCloakOut Auto
+
+; Sound Property MAGCloakFireLP Auto
+Sound Property WO_MAGCloakOfShadowsLP Auto
+
 ;########## PROPERTIES INIT END
 ; ==============================================================================================
 
+int _ambientSoundInstance
 
 ; ==============================================================================================
 ;########## EVENTS
 
 ;------------------------------------------------------------
 Event OnEffectStart(actor akTarget, actor akCaster)
-	akTarget.SetAlpha(0.3)
+	MAGCloakIn.Play(akTarget)
+	_ambientSoundInstance = WO_MAGCloakOfShadowsLP.Play(akTarget)
 
 EndEvent
 
 
 ;------------------------------------------------------------
 Event OnEffectFinish(actor akTarget, actor akCaster)
-	akTarget.SetAlpha(1)
+	Sound.StopInstance(_ambientSoundInstance)
+	MAGCloakOut.Play(akTarget)
 
 EndEvent
 

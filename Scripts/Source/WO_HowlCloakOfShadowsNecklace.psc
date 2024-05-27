@@ -24,7 +24,6 @@ Event OnEquipped(Actor akActor)
 
 	if (akActor == PlayerRef) && _necklacePowerIsTurnedOff
 		WO_NecklacePowerOfShadows.Value = 1
-		Debug.Notification("necklacePowerIsTurnedOn")
 	endif
 
 EndEvent
@@ -36,8 +35,6 @@ Event OnUnEquipped(Actor akActor)
 
 	if (akActor == PlayerRef) && (_playerRace != WerewolfBeastRace)
 		WO_NecklacePowerOfShadows.Value = 0
-		Debug.Notification("necklacePowerIsTurnedOff")
-
 	endif
 
 EndEvent

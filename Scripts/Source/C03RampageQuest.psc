@@ -85,20 +85,23 @@ WordOfPower Property HowlFear2 Auto
 WordOfPower Property HowlFear3 Auto
 
 Shout Property WO_HowlWerewolfUnrelentingRoar Auto
-WordOfPower Property WO_HowlUnrelentingRoar Auto
+WordOfPower Property WO_HowlUnrelentingRoar1 Auto
+WordOfPower Property WO_HowlUnrelentingRoar2 Auto
 
 Shout Property WO_HowlWerewolfScentOfBlood Auto
-WordOfPower Property WO_HowlScentOfBlood Auto
+WordOfPower Property WO_HowlScentOfBlood1 Auto
+WordOfPower Property WO_HowlScentOfBlood2 Auto
 
 Shout Property WO_HowlWerewolfFuriousHowl Auto
-WordOfPower Property WO_HowlFuriousHowl Auto
+WordOfPower Property WO_HowlFuriousHowl1 Auto
+WordOfPower Property WO_HowlFuriousHowl2 Auto
 
 Shout Property HowlWerewolfSummonWolves Auto
-WordOfPower Property HowlSummonWolves1 Auto
-WordOfPower Property HowlSummonWolves2 Auto
-WordOfPower Property HowlSummonWolves3 Auto
+WordOfPower Property WO_HowlCallOfThePack1 Auto
+WordOfPower Property WO_HowlCallOfThePack2 Auto
 
 Shout Property WO_HowlWerewolfPackLeader Auto
+WordOfPower Property WO_HowlPackLeader1 Auto
 WordOfPower Property WO_HowlPackLeader Auto
 
 ;------------------------------------------------------------
@@ -795,7 +798,7 @@ EndFunction
 ;------------------------------------------------------------
 Function AddHowlUnrelentingRoar()
 	if PlayerRef.HasPerk(WO_UnrelentingRoar1)
-		Game.UnlockWord(WO_HowlUnrelentingRoar)
+		Game.UnlockWord(WO_HowlUnrelentingRoar1)
 		PlayerRef.AddShout(WO_HowlWerewolfUnrelentingRoar)
 	endif
 	
@@ -805,7 +808,7 @@ EndFunction
 ;------------------------------------------------------------
 Function AddHowlScentOfBlood()
 	if PlayerRef.HasPerk(WO_ScentOfBlood1)
-		Game.UnlockWord(WO_HowlScentOfBlood)
+		Game.UnlockWord(WO_HowlScentOfBlood1)
 		PlayerRef.AddShout(WO_HowlWerewolfScentOfBlood)
 	endif
 	
@@ -815,7 +818,7 @@ EndFunction
 ;------------------------------------------------------------
 Function AddHowlFuriousHowl()
 	if PlayerRef.HasPerk(WO_FuriousHowl1)
-		Game.UnlockWord(WO_HowlFuriousHowl)
+		Game.UnlockWord(WO_HowlFuriousHowl1)
 		PlayerRef.AddShout(WO_HowlWerewolfFuriousHowl)
 	endif
 	
@@ -830,9 +833,8 @@ EndFunction
 ;------------------------------------------------------------
 Function AddHowlCallOfTheBrotherhood()
 	if PlayerRef.HasPerk(WO_AidOfBrothers1)
-		Game.UnlockWord(HowlSummonWolves1)
-		Game.UnlockWord(HowlSummonWolves2)
-		Game.UnlockWord(HowlSummonWolves3)
+		Game.UnlockWord(WO_HowlCallOfThePack1)
+		Game.UnlockWord(WO_HowlCallOfThePack2)
 		PlayerRef.AddShout(HowlWerewolfSummonWolves)
 	endif
 	
@@ -842,7 +844,7 @@ EndFunction
 ;------------------------------------------------------------
 Function AddHowlPackLeadersHowl()
 	if PlayerRef.HasPerk(WO_PackLeadersHowl1)
-		Game.UnlockWord(WO_HowlPackLeader)
+		Game.UnlockWord(WO_HowlPackLeader1)
 		PlayerRef.AddShout(WO_HowlWerewolfPackLeader)
 	endif
 	

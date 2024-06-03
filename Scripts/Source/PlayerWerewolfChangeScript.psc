@@ -118,8 +118,6 @@ Spell Property WerewolfChangeFX Auto
 ;------------------------------------------------------------
 ; Howls
 ;------------------------------------------------------------
-WordOfPower Property WO_HowlTerribleRoar Auto
-
 Spell Property WO_HowlWerewolfTerribleRoarSpell1 Auto
 Spell Property WO_HowlWerewolfTerribleRoarSpell2 Auto
 Spell Property WO_HowlWerewolfTerribleRoarSpell3 Auto
@@ -128,22 +126,16 @@ Shout Property WO_HowlWerewolfTerribleRoar2 Auto
 Shout Property WO_HowlWerewolfTerribleRoar3 Auto
 
 Shout Property WO_HowlWerewolfVictoryCry Auto
-WordOfPower Property WO_HowlVictoryCry Auto
 
-; Call Of The Pack
 Shout Property WO_HowlWerewolfCallOfThePack Auto
-WordOfPower Property WO_HowlCallOfThePack Auto
 
 Shout Property WO_HowlWerewolfSovereignsVoice1 Auto
 Shout Property WO_HowlWerewolfSovereignsVoice2 Auto
 Shout Property WO_HowlWerewolfSovereignsVoice3 Auto
-WordOfPower Property WO_HowlSovereignsVoice Auto
-; WO_HowlSovereignsVoiceAliasController Property HowlSovereignsVoiceAliasController Auto
 
 Shout Property WO_HowlWerewolfUnrelentingRoar1 Auto
 Shout Property WO_HowlWerewolfUnrelentingRoar2 Auto
 Shout Property WO_HowlWerewolfUnrelentingRoar3 Auto
-WordOfPower Property WO_HowlUnrelentingRoar Auto
 Message Property WO_UnrelentingRoarGainMessage Auto
 Spell Property WO_HowlWerewolfUnrelentingRoarSpell1 Auto
 Spell Property WO_HowlWerewolfUnrelentingRoarSpell2 Auto
@@ -152,13 +144,10 @@ Spell Property WO_HowlWerewolfUnrelentingRoarSpell3 Auto
 Shout Property WO_HowlWerewolfCursedFlame1 Auto
 Shout Property WO_HowlWerewolfCursedFlame2 Auto
 Shout Property WO_HowlWerewolfCursedFlame3 Auto
-WordOfPower Property WO_HowlCursedFlame Auto
 
 Shout Property WO_HowlWerewolfFuriousHowl Auto
-WordOfPower Property WO_HowlFuriousHowl Auto
 
 Shout Property WO_HowlWerewolfCloakOfShadows Auto
-WordOfPower Property WO_HowlCloakOfShadows Auto
 Spell Property WO_HowlWerewolfCloakOfShadows1 Auto
 Spell Property WO_HowlWerewolfCloakOfShadowsCloak Auto
 
@@ -467,60 +456,71 @@ Function HandlePlayerLoadGame()
 	;------------------------------------------------------------
 	WO_Unarmed.SetBaseDamage(PlayerRef.GetAV("UnarmedDamage") as int)
 
+
+	int playerLevel = PlayerRef.GetLevel()
 	;------------------------------------------------------------
 	; dynamic fear spell magnitude is resets to default each save load, so we have to set it again
 	;------------------------------------------------------------
 	if PlayerRef.HasPerk(WO_TerribleRoar1)
-		int playerLevel = PlayerRef.GetLevel()
+		spell howlSpell
+		float mult
 
 		if PlayerRef.HasPerk(WO_TerribleRoar3)
-			WO_HowlWerewolfTerribleRoarSpell3.SetNthEffectMagnitude(0, playerLevel * 1.30)
-			WO_HowlWerewolfTerribleRoarSpell3.SetNthEffectMagnitude(1, playerLevel * 1.30)
+			howlSpell = WO_HowlWerewolfTerribleRoarSpell3
+			mult = 1.30
 
 		elseif PlayerRef.HasPerk(WO_TerribleRoar2)
-			WO_HowlWerewolfTerribleRoarSpell2.SetNthEffectMagnitude(0, playerLevel * 1.15)
-			WO_HowlWerewolfTerribleRoarSpell2.SetNthEffectMagnitude(1, playerLevel * 1.15)
+			howlSpell = WO_HowlWerewolfTerribleRoarSpell2
+			mult = 1.15
 
 		else
-			WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(0, playerLevel * 1.0)
-			WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(1, playerLevel * 1.0)
+			howlSpell = WO_HowlWerewolfTerribleRoarSpell1
+			mult = 1.0
 		endif
+
+		howlSpell.SetNthEffectMagnitude(0, playerLevel * mult)
+		howlSpell.SetNthEffectMagnitude(1, playerLevel * mult)
 	endif
 
 	;------------------------------------------------------------
 	; the same for Unrelenting Roar spells
 	;------------------------------------------------------------
 	if PlayerRef.HasPerk(WO_UnrelentingRoar1)
-		int playerLevel = PlayerRef.GetLevel()
+		spell howlSpell
+		float mult
 
 		if PlayerRef.HasPerk(WO_UnrelentingRoar3)
-			WO_HowlWerewolfUnrelentingRoarSpell3.SetNthEffectMagnitude(1, playerLevel * 1.30)
+			howlSpell = WO_HowlWerewolfUnrelentingRoarSpell3
+			mult = 1.30
+
 		elseif PlayerRef.HasPerk(WO_UnrelentingRoar2)
-			WO_HowlWerewolfUnrelentingRoarSpell2.SetNthEffectMagnitude(1, playerLevel * 1.15)
+			howlSpell = WO_HowlWerewolfUnrelentingRoarSpell2
+			mult = 1.15
+
 		else
-			WO_HowlWerewolfUnrelentingRoarSpell1.SetNthEffectMagnitude(1, playerLevel * 1.0)
+			howlSpell = WO_HowlWerewolfUnrelentingRoarSpell1
+			mult = 1.0
 		endif
+
+		howlSpell.SetNthEffectMagnitude(1, playerLevel * mult)
 	endif
 
 	;------------------------------------------------------------
 	; and the same for Cloak of Shadows spells
 	;------------------------------------------------------------
 	if PlayerRef.HasPerk(WO_CloakOfShadows1)
-		float _actorValueToIncriseMult = 0.3
-		actorValueInfo _damageResistAVIF = ActorValueInfo.GetActorValueInfoByName("DamageResist")
+		spell howlSpell = WO_HowlWerewolfCloakofShadows1
+		float currentDamageResist = PlayerRef.GetAV("DamageResist")
+		float mult = 0.3
 
-		float _additionalDamageResist = _damageResistAVIF.GetMaximumValue(PlayerRef) * _actorValueToIncriseMult
-
-		WO_HowlWerewolfCloakofShadows1.SetNthEffectMagnitude(0, _additionalDamageResist)
+		howlSpell.SetNthEffectMagnitude(0, currentDamageResist * mult)
 
 		if WO_NecklacePowerOfShadows.Value > 0
-			actorValueInfo _staminaAVIF = ActorValueInfo.GetActorValueInfoByName("stamina")
+			float damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
+			float staminaToAbsorb = ActorValueInfo.GetActorValueInfoByName("stamina").GetMaximumValue(PlayerRef) * 0.05
 
-			float _staminaToAbsorb = _staminaAVIF.GetMaximumValue(PlayerRef) * 0.05
-			float _damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
-
-			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(0, _damageToDeal)
-			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(1, _staminaToAbsorb)
+			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(0, damageToDeal)
+			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(1, staminaToAbsorb)
 		endif
 	endif
 
@@ -1141,81 +1141,90 @@ EndFunction
 
 ;------------------------------------------------------------
 Function AddBeastPowerDetectAllCreatures()
-	if PlayerRef.HasPerk(WO_DetectAllCreatures)
-		;------------------------------------------------------------
-		; check if we have installed & enabled the 'Detect Life & Night Vision Overhaul' mod
-		;------------------------------------------------------------
-		Spell DLNV_WO_WerewolfDetectLife = Game.GetFormFromFile(0x478C65, "Detect Life & Night Vision Overhaul.esp") as spell
-
-		if DLNV_WO_WerewolfDetectLife
-			WerewolfDetectLife = DLNV_WO_WerewolfDetectLife
-			WO_SpellsPowers.AddForm(DLNV_WO_WerewolfDetectLife)
-
-		else
-		;------------------------------------------------------------
-		; otherwise we wanna to use 'Detect All Creatures' ability from this mod
-		;------------------------------------------------------------
-			WerewolfDetectLife = WO_WerewolfDetectLife
-			WO_SpellsPowers.AddForm(WO_WerewolfDetectLife)
-
-		endif
-
-		;------------------------------------------------------------
-		; give the spell chosen above
-		;------------------------------------------------------------
-		PlayerRef.AddSpell(WerewolfDetectLife, false)
+	if !PlayerRef.HasPerk(WO_DetectAllCreatures)
+		return
 	endif
-	
+
+	;------------------------------------------------------------
+	; check if we have installed & enabled the 'Detect Life & Night Vision Overhaul' mod
+	;------------------------------------------------------------
+	spell DLNV_WO_WerewolfDetectLife = Game.GetFormFromFile(0x478C65, "Detect Life & Night Vision Overhaul.esp") as spell
+
+	if DLNV_WO_WerewolfDetectLife
+		WerewolfDetectLife = DLNV_WO_WerewolfDetectLife
+	else
+	;------------------------------------------------------------
+	; otherwise we wanna to use 'Detect All Creatures' ability from this mod
+	;------------------------------------------------------------
+		WerewolfDetectLife = WO_WerewolfDetectLife
+	endif
+
+	;------------------------------------------------------------
+	; give the spell chosen above
+	;------------------------------------------------------------
+	WO_SpellsPowers.AddForm(WerewolfDetectLife)
+	PlayerRef.AddSpell(WerewolfDetectLife, false)
+
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddBeastPowerSupernaturalReflexes()
-	if PlayerRef.HasPerk(WO_SupernaturalReflexesPerk)
-		PlayerRef.AddSpell(WO_SupernaturalReflexes, false)
+	if !PlayerRef.HasPerk(WO_SupernaturalReflexesPerk)
+		return
 	endif
+
+	PlayerRef.AddSpell(WO_SupernaturalReflexes, false)
 	
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddBeastPowerAcceleratedMetabolism()
-	if PlayerRef.HasPerk(WO_AcceleratedMetabolismPerk)
-		PlayerRef.AddSpell(WO_AcceleratedMetabolism, false)
+	if !PlayerRef.HasPerk(WO_AcceleratedMetabolismPerk)
+		return
 	endif
+
+	PlayerRef.AddSpell(WO_AcceleratedMetabolism, false)
 	
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddHowlTerribleRoar()
-	Shout TerribleRoar
+	if !PlayerRef.HasPerk(WO_TerribleRoar1)
+		return
+	endif
+
 	int playerLevel = PlayerRef.GetLevel()
 
-	if PlayerRef.HasPerk(WO_TerribleRoar1)
-		if PlayerRef.HasPerk(WO_TerribleRoar3)
-			WO_HowlWerewolfTerribleRoarSpell3.SetNthEffectMagnitude(0, playerLevel * 1.30)
-			WO_HowlWerewolfTerribleRoarSpell3.SetNthEffectMagnitude(1, playerLevel * 1.3)
-			TerribleRoar = WO_HowlWerewolfTerribleRoar3
-			Game.UnlockWord(WO_HowlTerribleRoar)
+	shout howlShout
+	spell howlSpell
+	float mult
 
-		elseif PlayerRef.HasPerk(WO_TerribleRoar2)
-			WO_HowlWerewolfTerribleRoarSpell2.SetNthEffectMagnitude(0, playerLevel * 1.15)
-			WO_HowlWerewolfTerribleRoarSpell2.SetNthEffectMagnitude(1, playerLevel * 1.15)
-			TerribleRoar = WO_HowlWerewolfTerribleRoar2
-			Game.UnlockWord(WO_HowlTerribleRoar)
+	if PlayerRef.HasPerk(WO_TerribleRoar3)
+		howlShout = WO_HowlWerewolfTerribleRoar3
+		howlSpell = WO_HowlWerewolfTerribleRoarSpell3
+		mult = 1.30
 
-		elseif PlayerRef.HasPerk(WO_TerribleRoar1)
-			WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(0, playerLevel * 1.0)
-			WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(1, playerLevel * 1.0)
-			TerribleRoar = WO_HowlWerewolfTerribleRoar1
-			Game.UnlockWord(WO_HowlTerribleRoar)
-		endif
+	elseif PlayerRef.HasPerk(WO_TerribleRoar2)
+		howlShout = WO_HowlWerewolfTerribleRoar2
+		howlSpell = WO_HowlWerewolfTerribleRoarSpell2
+		mult = 1.15
 
-		PlayerRef.AddShout(TerribleRoar)
-		if !_currentHowl && !_currentBeastPower
-			PlayerRef.EquipShout(TerribleRoar)
-		endif
+	else
+		howlShout = WO_HowlWerewolfTerribleRoar3
+		howlSpell = WO_HowlWerewolfTerribleRoarSpell3
+		mult = 1.0
+	endif
+
+	howlSpell.SetNthEffectMagnitude(0, playerLevel * mult)
+	howlSpell.SetNthEffectMagnitude(1, playerLevel * mult)
+
+	PlayerRef.AddShout(howlShout)
+
+	if !_currentHowl && !_currentBeastPower
+		PlayerRef.EquipShout(howlShout)
 	endif
 
 EndFunction
@@ -1223,117 +1232,142 @@ EndFunction
 
 ;------------------------------------------------------------
 Function AddHowlVictoryCry()
-	if PlayerRef.HasPerk(WO_VictoryCry1)
-		Game.UnlockWord(WO_HowlVictoryCry)
-		PlayerRef.AddShout(WO_HowlWerewolfVictoryCry)
+	if !PlayerRef.HasPerk(WO_VictoryCry1)
+		return
 	endif
+
+	shout howlShout = WO_HowlWerewolfVictoryCry
+
+	PlayerRef.AddShout(howlShout)
 	
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddHowlCallOfThePack()
-	if PlayerRef.HasPerk(WO_CallOfThePack1)
-		Game.UnlockWord(WO_HowlCallOfThePack)
-		PlayerRef.AddShout(WO_HowlWerewolfCallOfThePack)
+	if !PlayerRef.HasPerk(WO_CallOfThePack1)
+		return
 	endif
+
+	shout howlShout = WO_HowlWerewolfCallOfThePack
+
+	PlayerRef.AddShout(howlShout)
 	
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddHowlSovereignsVoice()
-	if PlayerRef.HasPerk(WO_SovereignsVoice3)
-		Game.UnlockWord(WO_HowlSovereignsVoice)
-		PlayerRef.AddShout(WO_HowlWerewolfSovereignsVoice3)
-	elseif PlayerRef.HasPerk(WO_SovereignsVoice2)
-		Game.UnlockWord(WO_HowlSovereignsVoice)
-		PlayerRef.AddShout(WO_HowlWerewolfSovereignsVoice2)
-	elseif PlayerRef.HasPerk(WO_SovereignsVoice1)
-		Game.UnlockWord(WO_HowlSovereignsVoice)
-		PlayerRef.AddShout(WO_HowlWerewolfSovereignsVoice1)
+	if !PlayerRef.HasPerk(WO_SovereignsVoice1)
+		return
 	endif
-	
+
+	shout howlShout
+
+	if PlayerRef.HasPerk(WO_SovereignsVoice3)
+		howlShout = WO_HowlWerewolfSovereignsVoice3
+	elseif PlayerRef.HasPerk(WO_SovereignsVoice2)
+		howlShout = WO_HowlWerewolfSovereignsVoice2
+	else
+		howlShout = WO_HowlWerewolfSovereignsVoice1
+	endif
+
+	PlayerRef.AddShout(howlShout)
+
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddHowlUnrelentingRoar()
-	if PlayerRef.HasPerk(WO_UnrelentingRoar1)
-		int _playerLevel = PlayerRef.GetLevel()
-		shout _howlUnrelentingRoar = WO_HowlWerewolfUnrelentingRoar1
-
-		if PlayerRef.HasPerk(WO_UnrelentingRoar3)
-			WO_HowlWerewolfUnrelentingRoarSpell3.SetNthEffectMagnitude(1, _playerLevel * 1.30)
-			_howlUnrelentingRoar = WO_HowlWerewolfUnrelentingRoar3
-
-		elseif PlayerRef.HasPerk(WO_UnrelentingRoar2)
-			WO_HowlWerewolfUnrelentingRoarSpell2.SetNthEffectMagnitude(1, _playerLevel * 1.15)
-			_howlUnrelentingRoar = WO_HowlWerewolfUnrelentingRoar2
-
-		else
-			WO_HowlWerewolfUnrelentingRoarSpell1.SetNthEffectMagnitude(1, _playerLevel * 1.0)
-		endif
-
-		Game.UnlockWord(WO_HowlUnrelentingRoar)
-		PlayerRef.AddShout(_howlUnrelentingRoar)
+	if !PlayerRef.HasPerk(WO_UnrelentingRoar1)
+		return
 	endif
+
+	int playerLevel = PlayerRef.GetLevel()
+
+	shout howlShout
+	spell howlSpell
+	float mult
+
+	if PlayerRef.HasPerk(WO_UnrelentingRoar3)
+		howlShout = WO_HowlWerewolfUnrelentingRoar3
+		howlSpell = WO_HowlWerewolfUnrelentingRoarSpell3
+		mult = 1.30
+
+	elseif PlayerRef.HasPerk(WO_UnrelentingRoar2)
+		howlShout = WO_HowlWerewolfUnrelentingRoar2
+		howlSpell = WO_HowlWerewolfUnrelentingRoarSpell2
+		mult = 1.15
+			
+	else
+		howlShout = WO_HowlWerewolfUnrelentingRoar1
+		howlSpell = WO_HowlWerewolfUnrelentingRoarSpell1
+		mult = 1.0
+	endif
+
+	howlSpell.SetNthEffectMagnitude(1, playerLevel * mult)
+
+	PlayerRef.AddShout(howlShout)
 
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddHowlCursedFlame()
-	if PlayerRef.HasPerk(WO_CursedFlame1)
-		shout _howl
-		if PlayerRef.HasPerk(WO_CursedFlame3)
-			_howl = WO_HowlWerewolfCursedFlame3
-		elseif PlayerRef.HasPerk(WO_CursedFlame3)
-			_howl = WO_HowlWerewolfCursedFlame2
-		else
-			_howl = WO_HowlWerewolfCursedFlame1
-		endif
-
-		Game.UnlockWord(WO_HowlCursedFlame)
-		PlayerRef.AddShout(_howl)
+	if !PlayerRef.HasPerk(WO_CursedFlame1)
+		return
 	endif
+
+	shout howlShout
+
+	if PlayerRef.HasPerk(WO_CursedFlame3)
+		howlShout = WO_HowlWerewolfCursedFlame3
+	elseif PlayerRef.HasPerk(WO_CursedFlame3)
+		howlShout = WO_HowlWerewolfCursedFlame2
+	else
+		howlShout = WO_HowlWerewolfCursedFlame1
+	endif
+
+	PlayerRef.AddShout(howlShout)
 	
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddHowlFuriousHowl()
-	if PlayerRef.HasPerk(WO_FuriousHowl1)
-		Game.UnlockWord(WO_HowlFuriousHowl)
-		PlayerRef.AddShout(WO_HowlWerewolfFuriousHowl)
+	if !PlayerRef.HasPerk(WO_FuriousHowl1)
+		return
 	endif
+
+	shout howlShout = WO_HowlWerewolfFuriousHowl
+
+	PlayerRef.AddShout(howlShout)
 	
 EndFunction
 
 
 ;------------------------------------------------------------
 Function AddHowlCloakOfShadows()
-	if PlayerRef.HasPerk(WO_CloakOfShadows1)
-		float _actorValueToIncriseMult = 0.3
-		actorValueInfo _damageResistAVIF = ActorValueInfo.GetActorValueInfoByName("DamageResist")
-
-		float _additionalDamageResist = _damageResistAVIF.GetMaximumValue(PlayerRef) * _actorValueToIncriseMult
-
-		WO_HowlWerewolfCloakofShadows1.SetNthEffectMagnitude(0, _additionalDamageResist)
-
-		if WO_NecklacePowerOfShadows.Value > 0
-			actorValueInfo _staminaAVIF = ActorValueInfo.GetActorValueInfoByName("stamina")
-
-			float _staminaToAbsorb = _staminaAVIF.GetMaximumValue(PlayerRef) * 0.05
-			float _damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
-
-			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(0, _damageToDeal)
-			WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(1, _staminaToAbsorb)
-		endif
-
-		Game.UnlockWord(WO_HowlCloakOfShadows)
-		PlayerRef.AddShout(WO_HowlWerewolfCloakOfShadows)
+	if !PlayerRef.HasPerk(WO_CloakOfShadows1)
+		return
 	endif
+
+	shout howlShout = WO_HowlWerewolfCloakOfShadows
+	spell howlSpell = WO_HowlWerewolfCloakofShadows1
+	float currentDamageResist = PlayerRef.GetAV("DamageResist")
+	float mult = 0.3
+
+	howlSpell.SetNthEffectMagnitude(0, currentDamageResist * mult)
+
+	if WO_NecklacePowerOfShadows.Value > 0
+		float damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
+		float staminaToAbsorb = ActorValueInfo.GetActorValueInfoByName("stamina").GetMaximumValue(PlayerRef) * 0.05
+
+		WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(0, damageToDeal)
+		WO_HowlWerewolfCloakOfShadowsCloak.SetNthEffectMagnitude(1, staminaToAbsorb)
+	endif
+
+	PlayerRef.AddShout(howlShout)
 	
 EndFunction
 

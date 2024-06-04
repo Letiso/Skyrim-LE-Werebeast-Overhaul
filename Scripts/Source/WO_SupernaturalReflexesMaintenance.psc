@@ -20,6 +20,7 @@ ImageSpaceModifier Property WO_SupernaturalReflexesMainImod Auto
 ImageSpaceModifier Property WO_SupernaturalReflexesOutroImod Auto
 
 int Property MaxUsedChargesCount Auto
+Int Property UsedChargesCount Auto
 GlobalVariable Property TimeScale auto
 
 Message Property WO_SupernaturalReflexesWaitMessage Auto
@@ -27,6 +28,7 @@ Message Property WO_SupernaturalReflexesReadyMessage Auto
 
 Bool Property isSupernaturalReflexesActive Auto
 Bool Property isStillSwitching Auto
+
 
 ; ####### PROPERTIES END
 ; ==============================================================================================
@@ -43,7 +45,6 @@ float fadeInTime = 0.1
 ; time it takes for the particles to fade out
 float fadeOutTime = 0.1
 
-int _usedChargesCount
 
 ; ####### INTERNAL DATA END
 ; ==============================================================================================
@@ -55,10 +56,10 @@ int _usedChargesCount
 ; Charges restoring
 ;------------------------------------------------------------
 Event OnUpdate()
-	if !isSupernaturalReflexesActive && (_usedChargesCount > 0)
-		_usedChargesCount -= 1
+	if !isSupernaturalReflexesActive && (UsedChargesCount > 0)
+		UsedChargesCount -= 1
 		
-		if _usedChargesCount == 0
+		if UsedChargesCount == 0
 			WO_SupernaturalReflexesReadyMessage.Show()
 			UnregisterForUpdate()
 		endif
@@ -94,8 +95,6 @@ Function ToggleSupernaturalReflexes()
 	PlaySound()
 	WO_SupernaturalReflexesSlowTimeHitEffectArt.Cast(PlayerRef)
 
-	; _ChargesRestoringPeriod = RealTimeSecondsToHours(1)
-
 	if isSupernaturalReflexesActive
 		EnableSupernaturalReflexes()
 	else
@@ -120,6 +119,9 @@ EndFunction
 
 ;------------------------------------------------------------
 Function EnableSupernaturalReflexes()
+	int duration = self.MaxUsedChargesCount - self.UsedChargesCount
+	WO_SupernaturalReflexesSlowTime.SetNthEffectDuration(0, duration + 1)
+
 	WO_SupernaturalReflexesSlowTime.Cast(PlayerRef)
 	SlowTimeParticles02.remove(FadeOutTime)		; remove ShaderParticleGeometry
 	SlowTimeParticles02.apply(FadeInTime) 		; apply ShaderParticleGeometry
@@ -154,9 +156,9 @@ EndFunction
 ; Charges consumption
 ;------------------------------------------------------------
 Bool Function UseCharge()
-	_usedChargesCount += 1
+	UsedChargesCount += 1
 
-	if _usedChargesCount >= MaxUsedChargesCount
+	if UsedChargesCount >= MaxUsedChargesCount
 		WO_SupernaturalReflexesWaitMessage.Show()
 		ToggleSupernaturalReflexes()
 

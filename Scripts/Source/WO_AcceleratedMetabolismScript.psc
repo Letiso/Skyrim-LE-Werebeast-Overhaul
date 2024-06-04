@@ -4,7 +4,8 @@ Scriptname WO_AcceleratedMetabolismScript extends ActiveMagicEffect
 ; ==============================================================================================
 ; ####### PROPERTIES
 
-Spell Property ParentSpell Auto
+Spell Property WO_AcceleratedMetabolism Auto
+Spell Property WO_AcceleratedMetabolismSecondMagicEffect Auto
 Sound Property MAGPowerRacialHistskin Auto
 
 ; ####### PROPERTIES END
@@ -32,6 +33,8 @@ float _healthToRecover
 ;------------------------------------------------------------
 Event OnEffectStart(actor akTarget, actor akCaster)
 	_actorRef = akTarget
+	
+	WO_AcceleratedMetabolismSecondMagicEffect.Cast(_actorRef, _actorRef)
 
 	MAGPowerRacialHistskin.Play(_actorRef)
 
@@ -55,7 +58,8 @@ Event OnUpdate()
 		_actorRef.DamageAV("stamina",_damageToStamina)
 		_actorRef.RestoreAV("health",_healthToRecover)
 	else
-		_actorRef.DispelSpell(ParentSpell)
+		_actorRef.DispelSpell(WO_AcceleratedMetabolism)
+		_actorRef.DispelSpell(WO_AcceleratedMetabolismSecondMagicEffect)
 	endif
 
 EndEvent
@@ -63,7 +67,8 @@ EndEvent
 
 ;------------------------------------------------------------
 Event OnDying(actor akKiller)
-	_actorRef.DispelSpell(ParentSpell)
+	_actorRef.DispelSpell(WO_AcceleratedMetabolism)
+	_actorRef.DispelSpell(WO_AcceleratedMetabolismSecondMagicEffect)
 
 EndEvent
 

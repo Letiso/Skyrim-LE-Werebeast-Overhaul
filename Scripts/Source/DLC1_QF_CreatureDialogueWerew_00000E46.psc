@@ -929,10 +929,7 @@ GlobalVariable Property WO_DetectCorpsesIsActive Auto
 
 Spell Property WO_AcceleratedMetabolism Auto
 
-WO_SupernaturalReflexesMaintenance Property SupernaturalReflexesMaintenance Auto
-Spell Property WO_SupernaturalReflexesSlowTime Auto
 Spell Property WO_SupernaturalReflexes Auto
-GlobalVariable Property WO_SupernaturalReflexesMaxUsedCharges Auto
 
 WordOfPower Property WO_HowlTerribleRoar1 Auto
 WordOfPower Property WO_HowlTerribleRoar2 Auto

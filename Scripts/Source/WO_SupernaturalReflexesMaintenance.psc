@@ -74,7 +74,7 @@ EndEvent
 ;------------------------------------------------------------
 Event OnRaceSwitchComplete()
 	if isSupernaturalReflexesActive
-		ToggleSupernaturalReflexes()
+		; ToggleSupernaturalReflexes()
 	endif
 
 EndEvent

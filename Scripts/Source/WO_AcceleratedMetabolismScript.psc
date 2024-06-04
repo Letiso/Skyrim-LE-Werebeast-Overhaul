@@ -41,8 +41,9 @@ Event OnEffectStart(actor akTarget, actor akCaster)
 	_healthAVIF = ActorValueInfo.GetActorValueInfoByName("health")
 	_staminaAVIF = ActorValueInfo.GetActorValueInfoByName("stamina")
 
-	_damageToStamina = _staminaAVIF.GetMaximumValue(_actorRef) / 100
-	_healthToRecover = _damageToStamina / 2
+	_damageToStamina = _staminaAVIF.GetMaximumValue(_actorRef) / 75
+	_healthToRecover = _damageToStamina * 2
+	; / 2
 
 	RegisterForUpdate(0.08)
 

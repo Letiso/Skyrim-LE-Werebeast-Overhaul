@@ -184,9 +184,6 @@ Perk Property WO_AidOfBrothers1 Auto
 Perk Property WO_PackLeadersHowl1 Auto
 
 ; passive abilities
-Perk Property WO_Adrenaline Auto
-Spell Property WO_PerkAdrenaline Auto
-
 Perk Property WO_Maniac Auto
 Spell Property WO_PerkManiac Auto
 
@@ -699,7 +696,6 @@ Function HandlePlayerAbilities()
 		; remove passive abilities
 		;------------------------------------------------------------
 		PlayerRef.RemoveSpell(LeveledAbility)
-		PlayerRef.RemoveSpell(WO_PerkAdrenaline)
 		PlayerRef.RemoveSpell(WO_PerkManiac)
 
 	else
@@ -730,13 +726,6 @@ Function HandlePlayerAbilities()
 		;------------------------------------------------------------
 		; add passive abilities
 		;------------------------------------------------------------
-		if PlayerRef.HasPerk(WO_Adrenaline)
-			;------------------------------------------------------------
-			; controller & visual effect
-			;------------------------------------------------------------
-				PlayerRef.AddSpell(WO_PerkAdrenaline, false)
-			endif
-
 		if PlayerRef.HasPerk(WO_Maniac)
 			;------------------------------------------------------------
 			; feeding event call back

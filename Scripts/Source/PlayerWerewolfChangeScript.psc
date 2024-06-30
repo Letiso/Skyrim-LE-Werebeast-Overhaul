@@ -250,9 +250,6 @@ Perk Property WO_FuriousHowl1 Auto
 Perk Property WO_CloakOfShadows1 Auto
 
 ; passive abilities
-Perk Property WO_Adrenaline Auto
-Spell Property WO_PerkAdrenaline Auto
-
 Perk Property WO_Maniac Auto
 Spell Property WO_PerkManiac Auto
 
@@ -1053,13 +1050,6 @@ Function HandlePlayerAbilities()
 		;------------------------------------------------------------
 		; add passive abilities
 		;------------------------------------------------------------
-		if PlayerRef.HasPerk(WO_Adrenaline)
-			;------------------------------------------------------------
-			; ability switcher that debending on player's health percentage
-			;------------------------------------------------------------
-				PlayerRef.AddSpell(WO_PerkAdrenaline, false)
-			endif
-
 		if PlayerRef.HasPerk(WO_Maniac)
 			;------------------------------------------------------------
 			; feeding event call back

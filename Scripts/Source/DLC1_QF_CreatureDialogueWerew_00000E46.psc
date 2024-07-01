@@ -2,12 +2,43 @@
 ;NEXT FRAGMENT INDEX 83
 Scriptname DLC1_QF_CreatureDialogueWerew_00000E46 Extends Quest Hidden
 
-;BEGIN FRAGMENT Fragment_74
-Function Fragment_74()
+;BEGIN FRAGMENT Fragment_41
+Function Fragment_41()
 ;BEGIN CODE
-; Player picks pack perk
+; Player picks maniac perk
 
 Game.IncrementStat("NumWerewolfPerks")
+int counter
+
+while WO_FeedingCounter.Value >= 50
+	WO_FeedingCounter.Value -= 50
+
+	Game.GetPlayer().ModAV("health", 5)
+	Game.GetPlayer().ModAV("stamina", 5)
+	counter += 1
+endwhile
+
+if counter > 0
+	SendModEvent("MaxHealthChange")
+	WO_Maniac50VictimsMessage.Show()
+endif
+
+Game.GetPlayer().AddSpell(WO_PerkManiac, false)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_6
+Function Fragment_6()
+;BEGIN CODE
+; Player picks animal vigor 2 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+(PlayerWerewolfQuest as PlayerWerewolfChangeScript).MaxHealthStaminaBonus += 100
+
+Game.GetPlayer().ModAV("health", 100)
+Game.GetPlayer().ModAV("stamina", 100)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -25,72 +56,65 @@ Game.GetPlayer().AddSpell(WO_PerkBeastSpirit2, false)
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_34
-Function Fragment_34()
+;BEGIN FRAGMENT Fragment_10
+Function Fragment_10()
 ;BEGIN CODE
-; Player picks call of the pack 3 perk
+; Player picks beastial strength 75 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_42
-Function Fragment_42()
+;BEGIN FRAGMENT Fragment_31
+Function Fragment_31()
 ;BEGIN CODE
-; Player picks Hircines blessing perk
+; Player picks rage howl 3 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_82
-Function Fragment_82()
+;BEGIN FRAGMENT Fragment_16
+Function Fragment_16()
 ;BEGIN CODE
-; Player picks werewolves hunter perk
-
-WO_WerewolfHunterPerk.Value = 0
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_58
-Function Fragment_58()
-;BEGIN CODE
-; Player picks razor claws 3 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_51
-Function Fragment_51()
-;BEGIN CODE
-; Player picks acrobat 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_37
-Function Fragment_37()
-;BEGIN CODE
-; Player picks cursed flame 3 perk
+; Player picks savage feeding perk
 
 Game.IncrementStat("NumWerewolfPerks")
 
-if !Game.GetPlayer().HasSpell(WO_HowlWerewolfCursedFlame2)
-	CursedFlameCooldownHandler.HandlePerkGain(WO_HowlWerewolfCursedFlame3)
-else
-	Game.GetPlayer().AddShout(WO_HowlWerewolfCursedFlame3)
-	if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfCursedFlame2
-		Game.GetPlayer().EquipShout(WO_HowlWerewolfCursedFlame3)
+if Game.GetPlayer().HasSpell(WO_DetectCorpses)
+	Game.GetPlayer().AddSpell(WO_DetectCorpsesSavageFeeding)
+	if Game.GetPlayer().GetEquippedSpell(2) == WO_DetectCorpses
+		Game.GetPlayer().EquipSpell(WO_DetectCorpsesSavageFeeding, 2)
 	endif
-	Game.GetPlayer().RemoveShout(WO_HowlWerewolfCursedFlame2)
+	Game.GetPlayer().RemoveSpell(WO_DetectCorpses)
 endif
+
+if WO_DetectCorpsesIsActive.Value
+	Game.GetPlayer().DispelSpell(WO_DetectCorpses)
+	WO_DetectCorpsesIsActive.Value = 0
+	WO_DetectCorpsesSavageFeeding.Cast(Game.GetPlayer())
+endif
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_26
+Function Fragment_26()
+;BEGIN CODE
+; Player picks victory cry 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+WO_HowlVictoryCryChargesCount.Value = 1
+
+Game.UnlockWord(WO_HowlVictoryCry1)
+Game.UnlockWord(WO_HowlVictoryCry2)
+
+Game.GetPlayer().AddShout(WO_HowlWerewolfVictoryCry)
+
+WO_VictoryCryGainMessage.Show()
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -105,24 +129,60 @@ Game.IncrementStat("NumWerewolfPerks")
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_23
-Function Fragment_23()
+;BEGIN FRAGMENT Fragment_19
+Function Fragment_19()
 ;BEGIN CODE
-; Player picks unrelenting roar 1 perk
+; Player picks terrible roar 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 
-int playerLevel = Game.GetPlayer().GetLevel()
-WO_HowlWerewolfUnrelentingRoarSpell1.SetNthEffectMagnitude(1, playerLevel * 1.0)
+WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(0, Game.GetPlayer().GetLevel() * 1.0)
+WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(1, Game.GetPlayer().GetLevel() * 1.0)
 
-WO_HowlUnrelentingRoarChargesCount.Value = 1
+WO_HowlTerribleRoarChargesCount.Value = 1
 
-Game.UnlockWord(WO_HowlUnrelentingRoar1)
-Game.UnlockWord(WO_HowlUnrelentingRoar2)
+Game.UnlockWord(WO_HowlTerribleRoar1)
+Game.UnlockWord(WO_HowlTerribleRoar2)
 
-Game.GetPlayer().AddShout(WO_HowlWerewolfUnrelentingRoar1)
+Game.GetPlayer().AddShout(WO_HowlWerewolfTerribleRoar1)
 
-WO_UnrelentingRoarGainMessage.Show()
+WO_TerribleRoarGainMessage.Show()
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_27
+Function Fragment_27()
+;BEGIN CODE
+; Player picks victory cry 2 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+WO_HowlVictoryCryChargesCount.Value = 2
+
+if !Game.GetPlayer().HasSpell(WO_HowlWerewolfVictoryCry)
+	VictoryCryCooldownHandler.HandlePerkGain(WO_HowlWerewolfVictoryCry)
+endif
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_45
+Function Fragment_45()
+;BEGIN CODE
+; Player picks impenetrable skin 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_53
+Function Fragment_53()
+;BEGIN CODE
+; Player picks lacerations 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -144,67 +204,73 @@ WO_CloakOfShadowsGainMessage.Show()
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_60
-Function Fragment_60()
+;BEGIN FRAGMENT Fragment_78
+Function Fragment_78()
 ;BEGIN CODE
-; Player picks severe injuries 2 perk
+; Player picks sovereign's voice 3 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+WO_HowlSovereignsVoiceChargesCount.Value = 3
+WO_SovereignsVoiceCreaturesMaxCount.Value = 10
+
+Game.GetPlayer().AddShout(WO_HowlWerewolfSovereignsVoice3)
+if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfSovereignsVoice2
+	Game.GetPlayer().EquipShout(WO_HowlWerewolfSovereignsVoice3)
+endif
+Game.GetPlayer().RemoveShout(WO_HowlWerewolfSovereignsVoice2)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_49
+Function Fragment_49()
+;BEGIN CODE
+; Player picks equanimity 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_48
-Function Fragment_48()
+;BEGIN FRAGMENT Fragment_80
+Function Fragment_80()
 ;BEGIN CODE
-; Player picks impenetrable skin 4 perk
+; Player picks cloak of shadows 2 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_4
-Function Fragment_4()
+;BEGIN FRAGMENT Fragment_57
+Function Fragment_57()
 ;BEGIN CODE
-; Player picks animal vigor 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-(PlayerWerewolfQuest as PlayerWerewolfChangeScript).MaxHealthStaminaBonus += 100
-
-Game.GetPlayer().ModAV("health", 100)
-Game.GetPlayer().ModAV("stamina", 100)
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_31
-Function Fragment_31()
-;BEGIN CODE
-; Player picks rage howl 3 perk
+; Player picks razor claws 2 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_63
-Function Fragment_63()
+;BEGIN FRAGMENT Fragment_50
+Function Fragment_50()
 ;BEGIN CODE
-; Player picks adrenaline perk
+; Player picks equanimity 2 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_2
-Function Fragment_2()
+;BEGIN FRAGMENT Fragment_43
+Function Fragment_43()
 ;BEGIN CODE
-; Player picks beastial strength 50 perk
+; Player picks moonlight 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
+
+Game.GetPlayer().AddSpell(WO_PerkMoonlight1, false)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -229,128 +295,19 @@ endif
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_76
-Function Fragment_76()
+;BEGIN FRAGMENT Fragment_35
+Function Fragment_35()
 ;BEGIN CODE
-; Player picks sovereign's voice 1 perk
+; Player picks cursed flame 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 
-WO_HowlSovereignsVoiceChargesCount.Value = 1
-WO_SovereignsVoiceCreaturesMaxCount.Value = 3
+Game.UnlockWord(WO_HowlCursedFlame1)
+Game.UnlockWord(WO_HowlCursedFlame2)
 
-Game.UnlockWord(WO_HowlSovereignsVoice1)
-Game.UnlockWord(WO_HowlSovereignsVoice2)
+Game.GetPlayer().AddShout(WO_HowlWerewolfCursedFlame1)
 
-Game.GetPlayer().AddShout(WO_HowlWerewolfSovereignsVoice1)
-
-WO_SovereignsVoiceGainMessage.Show()
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_47
-Function Fragment_47()
-;BEGIN CODE
-; Player picks impenetrable skin 3 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_40
-Function Fragment_40()
-;BEGIN CODE
-; Player picks beast spirit 3 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit2)
-Game.GetPlayer().AddSpell(WO_PerkBeastSpirit3, false)
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_52
-Function Fragment_52()
-;BEGIN CODE
-; Player picks acrobat 2 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_29
-Function Fragment_29()
-;BEGIN CODE
-; Player picks rage howl 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-Game.UnlockWord(WO_HowlFuriousHowl1)
-Game.UnlockWord(WO_HowlFuriousHowl2)
-
-Game.GetPlayer().AddShout(WO_HowlWerewolfFuriousHowl)
-
-WO_FuriousHowlGainMessage.Show()
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_50
-Function Fragment_50()
-;BEGIN CODE
-; Player picks equanimity 2 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_57
-Function Fragment_57()
-;BEGIN CODE
-; Player picks razor claws 2 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_32
-Function Fragment_32()
-;BEGIN CODE
-; Player picks call of the pack 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-Game.UnlockWord(WO_HowlCallOfThePack1)
-Game.UnlockWord(WO_HowlCallOfThePack2)
-
-Game.GetPlayer().AddShout(WO_HowlWerewolfCallOfThePack)
-
-WO_CallOfThePackGainMessage.Show()
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_26
-Function Fragment_26()
-;BEGIN CODE
-; Player picks victory cry 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-WO_HowlVictoryCryChargesCount.Value = 1
-
-Game.UnlockWord(WO_HowlVictoryCry1)
-Game.UnlockWord(WO_HowlVictoryCry2)
-
-Game.GetPlayer().AddShout(WO_HowlWerewolfVictoryCry)
-
-WO_VictoryCryGainMessage.Show()
+WO_CursedFlameGainMessage.Show()
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -380,10 +337,114 @@ endif
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_10
-Function Fragment_10()
+;BEGIN FRAGMENT Fragment_51
+Function Fragment_51()
 ;BEGIN CODE
-; Player picks beastial strength 75 perk
+; Player picks acrobat 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_29
+Function Fragment_29()
+;BEGIN CODE
+; Player picks rage howl 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+Game.UnlockWord(WO_HowlFuriousHowl1)
+Game.UnlockWord(WO_HowlFuriousHowl2)
+
+Game.GetPlayer().AddShout(WO_HowlWerewolfFuriousHowl)
+
+WO_FuriousHowlGainMessage.Show()
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_54
+Function Fragment_54()
+;BEGIN CODE
+; Player picks lacerations 2 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_63
+Function Fragment_63()
+;BEGIN CODE
+; Player picks adrenaline perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+Game.GetPlayer().AddSpell(WO_PerkAdrenaline1)
+Game.GetPlayer().AddSpell(WO_PerkAdrenaline2)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_82
+Function Fragment_82()
+;BEGIN CODE
+; Player picks werewolves hunter perk
+
+WO_WerewolfHunterPerk.Value = 0
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_38
+Function Fragment_38()
+;BEGIN CODE
+; Player picks beast spirit 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit1, false)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_30
+Function Fragment_30()
+;BEGIN CODE
+; Player picks rage howl 2 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_74
+Function Fragment_74()
+;BEGIN CODE
+; Player picks pack perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_68
+Function Fragment_68()
+;BEGIN CODE
+; Player picks accelerated metabolism perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+Game.GetPlayer().AddSpell(WO_AcceleratedMetabolism)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_42
+Function Fragment_42()
+;BEGIN CODE
+; Player picks Hircines blessing perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
@@ -403,12 +464,54 @@ Game.GetPlayer().RemoveSpell(WO_PerkMoonlight1)
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_75
-Function Fragment_75()
+;BEGIN FRAGMENT Fragment_61
+Function Fragment_61()
 ;BEGIN CODE
-; Player picks scent of blood perk
+; Player picks severe injuries 3 perk
 
 Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_34
+Function Fragment_34()
+;BEGIN CODE
+; Player picks call of the pack 3 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_2
+Function Fragment_2()
+;BEGIN CODE
+; Player picks beastial strength 50 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_23
+Function Fragment_23()
+;BEGIN CODE
+; Player picks unrelenting roar 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+int playerLevel = Game.GetPlayer().GetLevel()
+WO_HowlWerewolfUnrelentingRoarSpell1.SetNthEffectMagnitude(1, playerLevel * 1.0)
+
+WO_HowlUnrelentingRoarChargesCount.Value = 1
+
+Game.UnlockWord(WO_HowlUnrelentingRoar1)
+Game.UnlockWord(WO_HowlUnrelentingRoar2)
+
+Game.GetPlayer().AddShout(WO_HowlWerewolfUnrelentingRoar1)
+
+WO_UnrelentingRoarGainMessage.Show()
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -423,6 +526,66 @@ Game.IncrementStat("NumWerewolfPerks")
 EndFunction
 ;END FRAGMENT
 
+;BEGIN FRAGMENT Fragment_32
+Function Fragment_32()
+;BEGIN CODE
+; Player picks call of the pack 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+Game.UnlockWord(WO_HowlCallOfThePack1)
+Game.UnlockWord(WO_HowlCallOfThePack2)
+
+Game.GetPlayer().AddShout(WO_HowlWerewolfCallOfThePack)
+
+WO_CallOfThePackGainMessage.Show()
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_62
+Function Fragment_62()
+;BEGIN CODE
+; Player picks slaughter perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_60
+Function Fragment_60()
+;BEGIN CODE
+; Player picks severe injuries 2 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_17
+Function Fragment_17()
+;BEGIN CODE
+; Player picks vampires hunter perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_40
+Function Fragment_40()
+;BEGIN CODE
+; Player picks beast spirit 3 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit2)
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit3, false)
+;END CODE
+EndFunction
+;END FRAGMENT
+
 ;BEGIN FRAGMENT Fragment_59
 Function Fragment_59()
 ;BEGIN CODE
@@ -433,25 +596,52 @@ Game.IncrementStat("NumWerewolfPerks")
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_64
-Function Fragment_64()
+;BEGIN FRAGMENT Fragment_75
+Function Fragment_75()
 ;BEGIN CODE
-; Player picks detect all creatures perk
+; Player picks scent of blood perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_56
+Function Fragment_56()
+;BEGIN CODE
+; Player picks razor claws 1 perk
+
+Game.IncrementStat("NumWerewolfPerks")
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_37
+Function Fragment_37()
+;BEGIN CODE
+; Player picks cursed flame 3 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 
-PlayerWerewolfChangeScript PlayerWerewolfQuestScript = PlayerWerewolfQuest as PlayerWerewolfChangeScript
-Spell DLNV_WO_WerewolfDetectLife = Game.GetFormFromFile(0x478C65, "Detect Life & Night Vision Overhaul.esp") as spell
-
-if DLNV_WO_WerewolfDetectLife 
-	WO_SpellsPowers.AddForm(DLNV_WO_WerewolfDetectLife)
-	PlayerWerewolfQuestScript.WerewolfDetectLife = DLNV_WO_WerewolfDetectLife
+if !Game.GetPlayer().HasSpell(WO_HowlWerewolfCursedFlame2)
+	CursedFlameCooldownHandler.HandlePerkGain(WO_HowlWerewolfCursedFlame3)
 else
-	PlayerWerewolfQuestScript.WerewolfDetectLife = WO_WerewolfDetectLife
-	WO_SpellsPowers.AddForm(WO_WerewolfDetectLife)
+	Game.GetPlayer().AddShout(WO_HowlWerewolfCursedFlame3)
+	if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfCursedFlame2
+		Game.GetPlayer().EquipShout(WO_HowlWerewolfCursedFlame3)
+	endif
+	Game.GetPlayer().RemoveShout(WO_HowlWerewolfCursedFlame2)
 endif
+;END CODE
+EndFunction
+;END FRAGMENT
 
-Game.GetPlayer().AddSpell(PlayerWerewolfQuestScript.WerewolfDetectLife)
+;BEGIN FRAGMENT Fragment_12
+Function Fragment_12()
+;BEGIN CODE
+; Player picks beastial strength 100 perk
+
+Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -481,28 +671,6 @@ endif
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_38
-Function Fragment_38()
-;BEGIN CODE
-; Player picks beast spirit 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-Game.GetPlayer().AddSpell(WO_PerkBeastSpirit1, false)
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_12
-Function Fragment_12()
-;BEGIN CODE
-; Player picks beastial strength 100 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
 ;BEGIN FRAGMENT Fragment_70
 Function Fragment_70()
 ;BEGIN CODE
@@ -515,131 +683,22 @@ Game.GetPlayer().AddSpell(WO_SupernaturalReflexes)
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_49
-Function Fragment_49()
+;BEGIN FRAGMENT Fragment_76
+Function Fragment_76()
 ;BEGIN CODE
-; Player picks equanimity 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_24
-Function Fragment_24()
-;BEGIN CODE
-; Player picks unrelenting roar 2 perk
+; Player picks sovereign's voice 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 
-int playerLevel = Game.GetPlayer().GetLevel()
-WO_HowlWerewolfUnrelentingRoarSpell2.SetNthEffectMagnitude(1, playerLevel * 1.15)
+WO_HowlSovereignsVoiceChargesCount.Value = 1
+WO_SovereignsVoiceCreaturesMaxCount.Value = 3
 
-WO_HowlUnrelentingRoarChargesCount.Value = 2
+Game.UnlockWord(WO_HowlSovereignsVoice1)
+Game.UnlockWord(WO_HowlSovereignsVoice2)
 
-if !Game.GetPlayer().HasSpell(WO_HowlWerewolfUnrelentingRoar1)
-	UnrelentingRoarCooldownHandler.HandlePerkGain(WO_HowlWerewolfUnrelentingRoar2)
-else
-	Game.GetPlayer().AddShout(WO_HowlWerewolfUnrelentingRoar2)
-	if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfUnrelentingRoar1
-		Game.GetPlayer().EquipShout(WO_HowlWerewolfUnrelentingRoar2)
-	endif
-	Game.GetPlayer().RemoveShout(WO_HowlWerewolfUnrelentingRoar1)
-endif
-;END CODE
-EndFunction
-;END FRAGMENT
+Game.GetPlayer().AddShout(WO_HowlWerewolfSovereignsVoice1)
 
-;BEGIN FRAGMENT Fragment_27
-Function Fragment_27()
-;BEGIN CODE
-; Player picks victory cry 2 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-WO_HowlVictoryCryChargesCount.Value = 2
-
-if !Game.GetPlayer().HasSpell(WO_HowlWerewolfVictoryCry)
-	VictoryCryCooldownHandler.HandlePerkGain(WO_HowlWerewolfVictoryCry)
-endif
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_80
-Function Fragment_80()
-;BEGIN CODE
-; Player picks cloak of shadows 2 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_62
-Function Fragment_62()
-;BEGIN CODE
-; Player picks slaughter perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_30
-Function Fragment_30()
-;BEGIN CODE
-; Player picks rage howl 2 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_68
-Function Fragment_68()
-;BEGIN CODE
-; Player picks accelerated metabolism perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-Game.GetPlayer().AddSpell(WO_AcceleratedMetabolism)
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_41
-Function Fragment_41()
-;BEGIN CODE
-; Player picks maniac perk
-
-Game.IncrementStat("NumWerewolfPerks")
-int counter
-
-while WO_FeedingCounter.Value >= 50
-	WO_FeedingCounter.Value -= 50
-
-	Game.GetPlayer().ModAV("health", 5)
-	Game.GetPlayer().ModAV("stamina", 5)
-	counter += 1
-endwhile
-
-if counter > 0
-	SendModEvent("MaxHealthChange")
-	WO_Maniac50VictimsMessage.Show()
-endif
-
-Game.GetPlayer().AddSpell(WO_PerkManiac, false)
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_45
-Function Fragment_45()
-;BEGIN CODE
-; Player picks impenetrable skin 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
+WO_SovereignsVoiceGainMessage.Show()
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -654,66 +713,20 @@ Game.IncrementStat("NumWerewolfPerks")
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_17
-Function Fragment_17()
+;BEGIN FRAGMENT Fragment_0
+Function Fragment_0()
 ;BEGIN CODE
-; Player picks vampires hunter perk
+; Player picks beastial strength 25 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_19
-Function Fragment_19()
+;BEGIN FRAGMENT Fragment_52
+Function Fragment_52()
 ;BEGIN CODE
-; Player picks terrible roar 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(0, Game.GetPlayer().GetLevel() * 1.0)
-WO_HowlWerewolfTerribleRoarSpell1.SetNthEffectMagnitude(1, Game.GetPlayer().GetLevel() * 1.0)
-
-WO_HowlTerribleRoarChargesCount.Value = 1
-
-Game.UnlockWord(WO_HowlTerribleRoar1)
-Game.UnlockWord(WO_HowlTerribleRoar2)
-
-Game.GetPlayer().AddShout(WO_HowlWerewolfTerribleRoar1)
-
-WO_TerribleRoarGainMessage.Show()
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_16
-Function Fragment_16()
-;BEGIN CODE
-; Player picks savage feeding perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-if Game.GetPlayer().HasSpell(WO_DetectCorpses)
-	Game.GetPlayer().AddSpell(WO_DetectCorpsesSavageFeeding)
-	if Game.GetPlayer().GetEquippedSpell(2) == WO_DetectCorpses
-		Game.GetPlayer().EquipSpell(WO_DetectCorpsesSavageFeeding, 2)
-	endif
-	Game.GetPlayer().RemoveSpell(WO_DetectCorpses)
-endif
-
-if WO_DetectCorpsesIsActive.Value
-	Game.GetPlayer().DispelSpell(WO_DetectCorpses)
-	WO_DetectCorpsesIsActive.Value = 0
-	WO_DetectCorpsesSavageFeeding.Cast(Game.GetPlayer())
-endif
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_56
-Function Fragment_56()
-;BEGIN CODE
-; Player picks razor claws 1 perk
+; Player picks acrobat 2 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
@@ -730,16 +743,6 @@ Game.IncrementStat("NumWerewolfPerks")
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_53
-Function Fragment_53()
-;BEGIN CODE
-; Player picks lacerations 1 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-;END CODE
-EndFunction
-;END FRAGMENT
-
 ;BEGIN FRAGMENT Fragment_33
 Function Fragment_33()
 ;BEGIN CODE
@@ -750,10 +753,10 @@ Game.IncrementStat("NumWerewolfPerks")
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_61
-Function Fragment_61()
+;BEGIN FRAGMENT Fragment_48
+Function Fragment_48()
 ;BEGIN CODE
-; Player picks severe injuries 3 perk
+; Player picks impenetrable skin 4 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
@@ -801,29 +804,27 @@ endif
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_0
-Function Fragment_0()
+;BEGIN FRAGMENT Fragment_4
+Function Fragment_4()
 ;BEGIN CODE
-; Player picks beastial strength 25 perk
+; Player picks animal vigor 1 perk
 
 Game.IncrementStat("NumWerewolfPerks")
+
+(PlayerWerewolfQuest as PlayerWerewolfChangeScript).MaxHealthStaminaBonus += 100
+
+Game.GetPlayer().ModAV("health", 100)
+Game.GetPlayer().ModAV("stamina", 100)
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_35
-Function Fragment_35()
+;BEGIN FRAGMENT Fragment_58
+Function Fragment_58()
 ;BEGIN CODE
-; Player picks cursed flame 1 perk
+; Player picks razor claws 3 perk
 
 Game.IncrementStat("NumWerewolfPerks")
-
-Game.UnlockWord(WO_HowlCursedFlame1)
-Game.UnlockWord(WO_HowlCursedFlame2)
-
-Game.GetPlayer().AddShout(WO_HowlWerewolfCursedFlame1)
-
-WO_CursedFlameGainMessage.Show()
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -857,58 +858,60 @@ Game.GetPlayer().RemoveShout(WO_HowlWerewolfSovereignsVoice1)
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_54
-Function Fragment_54()
+;BEGIN FRAGMENT Fragment_47
+Function Fragment_47()
 ;BEGIN CODE
-; Player picks lacerations 2 perk
+; Player picks impenetrable skin 3 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 ;END CODE
 EndFunction
 ;END FRAGMENT
 
-;BEGIN FRAGMENT Fragment_43
-Function Fragment_43()
+;BEGIN FRAGMENT Fragment_24
+Function Fragment_24()
 ;BEGIN CODE
-; Player picks moonlight 1 perk
+; Player picks unrelenting roar 2 perk
 
 Game.IncrementStat("NumWerewolfPerks")
 
-Game.GetPlayer().AddSpell(WO_PerkMoonlight1, false)
-;END CODE
-EndFunction
-;END FRAGMENT
+int playerLevel = Game.GetPlayer().GetLevel()
+WO_HowlWerewolfUnrelentingRoarSpell2.SetNthEffectMagnitude(1, playerLevel * 1.15)
 
-;BEGIN FRAGMENT Fragment_6
-Function Fragment_6()
-;BEGIN CODE
-; Player picks animal vigor 2 perk
+WO_HowlUnrelentingRoarChargesCount.Value = 2
 
-Game.IncrementStat("NumWerewolfPerks")
-
-(PlayerWerewolfQuest as PlayerWerewolfChangeScript).MaxHealthStaminaBonus += 100
-
-Game.GetPlayer().ModAV("health", 100)
-Game.GetPlayer().ModAV("stamina", 100)
-;END CODE
-EndFunction
-;END FRAGMENT
-
-;BEGIN FRAGMENT Fragment_78
-Function Fragment_78()
-;BEGIN CODE
-; Player picks sovereign's voice 3 perk
-
-Game.IncrementStat("NumWerewolfPerks")
-
-WO_HowlSovereignsVoiceChargesCount.Value = 3
-WO_SovereignsVoiceCreaturesMaxCount.Value = 10
-
-Game.GetPlayer().AddShout(WO_HowlWerewolfSovereignsVoice3)
-if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfSovereignsVoice2
-	Game.GetPlayer().EquipShout(WO_HowlWerewolfSovereignsVoice3)
+if !Game.GetPlayer().HasSpell(WO_HowlWerewolfUnrelentingRoar1)
+	UnrelentingRoarCooldownHandler.HandlePerkGain(WO_HowlWerewolfUnrelentingRoar2)
+else
+	Game.GetPlayer().AddShout(WO_HowlWerewolfUnrelentingRoar2)
+	if Game.GetPlayer().GetEquippedShout() == WO_HowlWerewolfUnrelentingRoar1
+		Game.GetPlayer().EquipShout(WO_HowlWerewolfUnrelentingRoar2)
+	endif
+	Game.GetPlayer().RemoveShout(WO_HowlWerewolfUnrelentingRoar1)
 endif
-Game.GetPlayer().RemoveShout(WO_HowlWerewolfSovereignsVoice2)
+;END CODE
+EndFunction
+;END FRAGMENT
+
+;BEGIN FRAGMENT Fragment_64
+Function Fragment_64()
+;BEGIN CODE
+; Player picks detect all creatures perk
+
+Game.IncrementStat("NumWerewolfPerks")
+
+PlayerWerewolfChangeScript PlayerWerewolfQuestScript = PlayerWerewolfQuest as PlayerWerewolfChangeScript
+Spell DLNV_WO_WerewolfDetectLife = Game.GetFormFromFile(0x478C65, "Detect Life & Night Vision Overhaul.esp") as spell
+
+if DLNV_WO_WerewolfDetectLife 
+	WO_SpellsPowers.AddForm(DLNV_WO_WerewolfDetectLife)
+	PlayerWerewolfQuestScript.WerewolfDetectLife = DLNV_WO_WerewolfDetectLife
+else
+	PlayerWerewolfQuestScript.WerewolfDetectLife = WO_WerewolfDetectLife
+	WO_SpellsPowers.AddForm(WO_WerewolfDetectLife)
+endif
+
+Game.GetPlayer().AddSpell(PlayerWerewolfQuestScript.WerewolfDetectLife)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -997,6 +1000,9 @@ Message Property WO_Maniac50VictimsMessage Auto
 Spell Property WO_PerkBeastSpirit1 Auto
 Spell Property WO_PerkBeastSpirit2 Auto
 Spell Property WO_PerkBeastSpirit3 Auto
+
+Spell Property WO_PerkAdrenaline1 Auto
+Spell Property WO_PerkAdrenaline2 Auto
 
 Spell Property WO_PerkMoonlight1 Auto
 Spell Property WO_PerkMoonlight2 Auto

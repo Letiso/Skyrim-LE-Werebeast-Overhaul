@@ -7,11 +7,13 @@
 Actor Property PlayerRef Auto
 
 Perk Property WO_WerewolvesHunter Auto
+Spell Property WO_WerewolvesHunterSpell Auto
 
 Message Property WO_WerewolvesHunterGainMessage Auto
 
 LeveledItem Property WO_DeathItemWerewolvesHunter Auto
 
+; Gallows Rock entries
 ObjectReference Property WerewolfCorpses1 Auto
 ObjectReference Property WerewolfCorpses2 Auto
 ObjectReference Property WerewolfCorpses3 Auto
@@ -36,6 +38,7 @@ ObjectReference Property WerewolfPrisoner2 Auto
 Event OnRead()
 	if !PlayerRef.HasPerk(WO_WerewolvesHunter)
 		PlayerRef.AddPerk(WO_WerewolvesHunter)
+		PlayerRef.AddSpell(WO_WerewolvesHunterSpell)
 
 		WO_WerewolvesHunterGainMessage.Show()
 

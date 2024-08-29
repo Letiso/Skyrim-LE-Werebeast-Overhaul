@@ -16,7 +16,6 @@ Race Property DLC1VampireBeastRace Auto
 ; SpellsPowers
 ;------------------------------------------------------------
 FormList Property WO_SpellsPowers Auto
-FormList Property WerewolfDispelList Auto
 FormList Property DLC1VampireSpellsPowers Auto
 
 ;------------------------------------------------------------
@@ -1095,17 +1094,6 @@ Function HandlePlayerAbilities()
 				PlayerRef.RemoveShout(spellPower as shout)
 			endif
 
-			counter += 1
-		endwhile
-
-		;------------------------------------------------------------
-		; dispel werewolf spells
-		;------------------------------------------------------------
-		counter = 0
-		while counter < WerewolfDispelList.GetSize()
-			spell spellPower = WerewolfDispelList.GetAt(counter) as spell
-			PlayerRef.DispelSpell(spellPower)
-	
 			counter += 1
 		endwhile
 

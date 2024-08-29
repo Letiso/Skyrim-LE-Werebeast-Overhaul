@@ -20,7 +20,12 @@ Function Fragment_39()
 Game.IncrementStat("NumWerewolfPerks")
 
 Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit1)
-Game.GetPlayer().AddSpell(WO_PerkBeastSpirit2, false)
+Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit2)
+Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit3)
+
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit4, false)
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit5, false)
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit6, false)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -304,8 +309,13 @@ Function Fragment_40()
 
 Game.IncrementStat("NumWerewolfPerks")
 
-Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit2)
-Game.GetPlayer().AddSpell(WO_PerkBeastSpirit3, false)
+Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit4)
+Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit5)
+Game.GetPlayer().RemoveSpell(WO_PerkBeastSpirit6)
+
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit7, false)
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit8, false)
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit9, false)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -550,6 +560,8 @@ Function Fragment_38()
 Game.IncrementStat("NumWerewolfPerks")
 
 Game.GetPlayer().AddSpell(WO_PerkBeastSpirit1, false)
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit2, false)
+Game.GetPlayer().AddSpell(WO_PerkBeastSpirit3, false)
 ;END CODE
 EndFunction
 ;END FRAGMENT
@@ -1004,6 +1016,12 @@ Message Property WO_Maniac50VictimsMessage Auto
 Spell Property WO_PerkBeastSpirit1 Auto
 Spell Property WO_PerkBeastSpirit2 Auto
 Spell Property WO_PerkBeastSpirit3 Auto
+Spell Property WO_PerkBeastSpirit4 Auto
+Spell Property WO_PerkBeastSpirit5 Auto
+Spell Property WO_PerkBeastSpirit6 Auto
+Spell Property WO_PerkBeastSpirit7 Auto
+Spell Property WO_PerkBeastSpirit8 Auto
+Spell Property WO_PerkBeastSpirit9 Auto
 
 Spell Property WO_PerkAdrenaline1 Auto
 Spell Property WO_PerkAdrenaline2 Auto

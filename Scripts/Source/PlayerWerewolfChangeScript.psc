@@ -505,12 +505,6 @@ Function HandlePlayerLoadGame()
 	; and the same for Cloak of Shadows spells
 	;------------------------------------------------------------
 	if PlayerRef.HasPerk(WO_CloakOfShadows1)
-		spell howlSpell = WO_HowlWerewolfCloakofShadows1
-		float currentDamageResist = PlayerRef.GetAV("DamageResist")
-		float mult = 0.3
-
-		howlSpell.SetNthEffectMagnitude(0, currentDamageResist * mult)
-
 		if WO_NecklacePowerOfShadows.Value > 0
 			float damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
 			float staminaToAbsorb = ActorValueInfo.GetActorValueInfoByName("stamina").GetMaximumValue(PlayerRef) * 0.05
@@ -1331,11 +1325,6 @@ Function AddHowlCloakOfShadows()
 	endif
 
 	shout howlShout = WO_HowlWerewolfCloakOfShadows
-	spell howlSpell = WO_HowlWerewolfCloakofShadows1
-	float currentDamageResist = PlayerRef.GetAV("DamageResist")
-	float mult = 0.3
-
-	howlSpell.SetNthEffectMagnitude(0, currentDamageResist * mult)
 
 	if WO_NecklacePowerOfShadows.Value > 0
 		float damageToDeal = PlayerRef.GetAV("UnarmedDamage") / 2
